@@ -1,5 +1,5 @@
 const { Client } = require('pg');
-const connectionString = process.env.DATABASE_URL || 'http://localhost:5432/your-database-name';
+const connectionString = process.env.DATABASE_URL || 'http://localhost:5432/Lizards_Plushies';
 
 const db = new Client({
     connectionString,
