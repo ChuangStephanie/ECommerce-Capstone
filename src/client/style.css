@@ -16,3 +16,23 @@
 }
 
 /* Add more styling for other elements if needed */
+nav{
+  text-align: center;
+}
+nav ul{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+nav ul li a{
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+nav ul li a:hover{
+  text-decoration: underline;
+  color: blue;
+}
