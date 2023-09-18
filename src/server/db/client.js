@@ -7,4 +7,6 @@ const db = new Client({
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
 });
 
+
+
 module.exports = db;
