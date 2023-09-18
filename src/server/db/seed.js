@@ -1,5 +1,6 @@
-const db = require('./client');
-const { createUser } = require('./users');
+const db = require('./client')
+const { createUser } = require('./users')
+const { createProduct } = require('./products')
 
 const users = [
   {
@@ -27,59 +28,110 @@ const users = [
     email: 'john@example.com',
     password: 'password123',
   },
-  // Add more user objects as needed
-];  
+]
+
+const products = [
+  {
+    name: 'Product 1',
+    price: 19.99,
+    description: 'Description for Product 1',
+  },
+  {
+    name: 'Product 2',
+    price: 29.99,
+    description: 'Description for Product 2',
+  },
+  {
+    name: 'Product 3',
+    price: 9.99,
+    description: 'Description for Product 3',
+  },
+  {
+    name: 'Product 4',
+    price: 39.99,
+    description: 'Description for Product 4',
+  },
+  {
+    name: 'Product 5',
+    price: 49.99,
+    description: 'Description for Product 5',
+  },
+]
 
 const dropTables = async () => {
-    try {
-        await db.query(`
-        DROP TABLE IF EXISTS users;
-        `)
-    }
-    catch(err) {
-        throw err;
-    }
+  try {
+    await db.query(`
+      DROP TABLE IF EXISTS users, products;
+    `)
+  } catch (err) {
+    throw err
+  }
 }
 
 const createTables = async () => {
-    try{
-        await db.query(`
-        CREATE TABLE users(
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(255) DEFAULT 'name',
-            email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL
-        )`)
-    }
-    catch(err) {
-        throw err;
-    }
+  try {
+    await db.query(`
+      CREATE TABLE users(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) DEFAULT 'name',
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL
+      );
+
+      CREATE TABLE products(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        price NUMERIC(10, 2) NOT NULL,
+        description TEXT
+      );
+    `)
+  } catch (err) {
+    throw err
+  }
 }
 
 const insertUsers = async () => {
   try {
     for (const user of users) {
-      await createUser({name: user.name, email: user.email, password: user.password});
+      await createUser({
+        name: user.name,
+        email: user.email,
+        password: user.password,
+      })
     }
-    console.log('Seed data inserted successfully.');
+    console.log('User seed data inserted successfully.')
   } catch (error) {
-    console.error('Error inserting seed data:', error);
+    console.error('Error inserting user seed data:', error)
   }
-};
-
-const seedDatabse = async () => {
-    try {
-        db.connect();
-        await dropTables();
-        await createTables();
-        await insertUsers();
-    }
-    catch (err) {
-        throw err;
-    }
-    finally {
-        db.end()
-    }
 }
 
-seedDatabse()
+const insertProducts = async () => {
+  try {
+    for (const product of products) {
+      await createProduct({
+        name: product.name,
+        price: product.price,
+        description: product.description,
+      })
+    }
+    console.log('Product seed data inserted successfully.')
+  } catch (error) {
+    console.error('Error inserting product seed data:', error)
+  }
+}
+
+const seedDatabase = async () => {
+  try {
+    db.connect()
+    await dropTables()
+    await createTables()
+    await insertUsers()
+    await insertProducts()
+  } catch (err) {
+    throw err
+  } finally {
+    db.end()
+  }
+}
+
+seedDatabase()
