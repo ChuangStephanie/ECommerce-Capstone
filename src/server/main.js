@@ -11,6 +11,12 @@ app.use(express.static('public'))
 
 const db = require('./db/client')
 db.connect()
+.then(() => {
+  console.log('Database connected successfully');
+})
+.catch((error) => {
+  console.error('Error connecting to the database:', error);
+});
 
 const apiRouter = require('./api');
 app.use('/api', apiRouter);
