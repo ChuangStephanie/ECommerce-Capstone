@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { fetchAllProducts } from "../API";
 
-const Home = () => {
-  return (
-    <div className="App">
-        <h1>Boilerplate</h1>
-        <img id="comp-img" src="./computer.png"></img>
-        <p>Replace the starter code in this template with something cool</p>
-      </div>
-  )
+export default function Home() {
+  const [posts, setPosts] = useState([]);
+  const [error, setError] = useState(null);
+  const [searchParam, setSearchParam] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getAllProducts() {
+      const APIData = await fetchAllProducts();
+      if (APIData) {
+        setPosts(APIData.products);
+      } else {
+        setError(window.alert("No products found"));
+      }
+    }
+  })
+
 }
-
-export default Home
