@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env
 
 
+const volleyball = require('volleyball')
+apiRouter.use(volleyball)
+
 
 // TO BE COMPLETED - set `req.user` if possible, using token sent in the request header
 apiRouter.use(async (req, res, next) => {
