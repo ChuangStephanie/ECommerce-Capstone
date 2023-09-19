@@ -18,6 +18,20 @@ const createProduct = async ({ name, price, description }) => {
   }
 };
 
+const getAllProducts = async () => {
+  try {
+    const query = `
+      SELECT * FROM products;
+    `;
+
+    const { rows: products } = await db.query(query);
+
+    return products;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
-  createProduct,
+  getAllProducts, createProduct
 };
