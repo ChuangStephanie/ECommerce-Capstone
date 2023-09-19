@@ -1,6 +1,6 @@
 const { Client } = require('pg');
 
-const connectionString = process.env.DATABASE_URL || 'postgres://lizards_plushies_user:FVO8HMBA5YNcDPSmsKam1h2VfdDr1HPL@dpg-ck3kkm7qj8ts73faggug-a.ohio-postgres.render.com/lizards_plushies?ssl=true';
+const connectionString = process.env.DATABASE_URL || 'https://localhost:5432/lizardsplushies';
 
 const db = new Client({
     connectionString,
