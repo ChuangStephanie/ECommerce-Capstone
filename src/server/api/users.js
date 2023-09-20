@@ -74,13 +74,14 @@ usersRouter.post('/register', async(req, res, next) => {
             email,
             password
         });
-
+        
         const token = jwt.sign({
             id: user.id,
             email
-        }, process.env.JWT_SECRET, {
+        }, `${process.env.JWT_SECRET}`, {
             expiresIn: '1w'
         });
+        
 
         res.send({
             message: 'Sign up successful!',
