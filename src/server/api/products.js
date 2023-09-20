@@ -2,18 +2,88 @@ const express = require('express')
 const productsRouter = express.Router()
 
 const jwt = require('jsonwebtoken');
-const { getAllProducts } = require('../db/products');
+const { getAllProducts, createProduct, updateProduct, deleteProduct, getSingleProduct } = require('../db/products');
 
 productsRouter.get('/', async( req, res, next) => {
     try {
-        const users = await getAllProducts();
+        const products = await getAllProducts();
 
         res.send({
-            users
+            products
         });
     } catch ({name, message}) {
         next({name, message})
     }
 });
+
+productsRouter.get('/:id', async(req,res,next)=>{
+    const productId = req.params.id
+    try {
+        const product = await getSingleProduct(productId);
+
+        res.send(
+            {
+                product
+            }
+        )
+    } catch ({name, message}) {
+        next({name, message})
+    }
+})
+
+productsRouter.post('/', async(req,res,next)=>{
+    const { name, price, description } = req.body
+    try {
+        const product = await createProduct({
+            name,
+            price,
+            description
+        });
+
+        res.send(
+            {
+                product
+            }
+        )
+    } catch ({name, message}) {
+        next({name, message})
+    }
+})
+
+productsRouter.patch('/:id', async(req,res,next)=>{
+    const productId = req.params.id
+    const { name, price, description } = req.body
+    try {
+        const product = await updateProduct(productId, {
+            name,
+            price,
+            description
+        });
+
+        res.send(
+            {
+                product
+            }
+        )
+    } catch ({name, message}) {
+        next({name, message})
+    }
+})
+
+productsRouter.delete('/:id', async(req,res,next)=>{
+    const productId = req.params.id
+    try {
+        const product = await deleteProduct(productId);
+
+        res.send(
+            {
+                product
+            }
+        )
+    } catch ({name, message}) {
+        next({name, message})
+    }
+})
+
 
 module.exports = productsRouter
