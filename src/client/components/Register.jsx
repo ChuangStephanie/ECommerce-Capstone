@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
-import { UserContext } from '../App';
-const Login = () => {
-  const {userLogged, setUserLogged} = useContext(UserContext)
+import React, { useState } from 'react';
+
+const Register = () => {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
@@ -10,18 +10,23 @@ const Login = () => {
     setEmail(e.target.value);
   };
 
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
-  const login = async() => {
+  const register = async() => {
     try {
-        const response = await fetch('http://localhost:3000/api/users/login', {
+        const response = await fetch('http://localhost:3000/api/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
             }, 
             body: JSON.stringify({
+                name,
                 email,
                 password
             })
@@ -31,9 +36,9 @@ const Login = () => {
         if(!response.ok) {
           throw(result)
         }
+        setName('')
         setEmail('');
         setPassword('');
-        setUserLogged(true)
     } catch (err) {
         console.error(`${err.name}: ${err.message}`);
     }
@@ -41,13 +46,23 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login();
+    register();
   };
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Register</h2>
       <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor='name'>Name:</label>
+          <input
+            type='name'
+            id='name'
+            value={name}
+            onChange={handleNameChange}
+            required
+          />
+        </div>
         <div>
           <label htmlFor='email'>Email:</label>
           <input
@@ -68,11 +83,11 @@ const Login = () => {
             required
           />
         </div>
-        <button type='submit'>Login</button>
+        <button type='submit'>Register</button>
       </form>
       <p>{message}</p>
     </div>
   );
 };
 
-export default Login;
+export default Register;
