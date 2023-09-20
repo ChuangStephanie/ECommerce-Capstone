@@ -4,7 +4,8 @@ const usersRouter = express.Router();
 const {
     createUser,
     getUser,
-    getUserByEmail
+    getUserByEmail,
+    getAllUsers
 } = require('../db');
 
 const jwt = require('jsonwebtoken')
@@ -56,7 +57,7 @@ usersRouter.post('/login', async(req, res, next) => {
 });
 
 usersRouter.post('/register', async(req, res, next) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, isAdmin } = req.body;
 
     try {
         const _user = await getUserByEmail(email);
@@ -71,15 +72,17 @@ usersRouter.post('/register', async(req, res, next) => {
         const user = await createUser({
             name,
             email,
-            password
+            password,
+            isAdmin
         });
-
+        
         const token = jwt.sign({
             id: user.id,
             email
-        }, process.env.JWT_SECRET, {
+        }, `${process.env.JWT_SECRET}`, {
             expiresIn: '1w'
         });
+        
 
         res.send({
             message: 'Sign up successful!',

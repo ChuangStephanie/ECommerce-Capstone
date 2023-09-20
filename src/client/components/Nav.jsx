@@ -1,23 +1,36 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
+
 
 const Nav = () => {
-  return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li>
-        <li></li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-      </ul>
-    </nav>
-  );
+    const navigate = useNavigate()
+    const { userLogged, setUserLogged } = useContext(UserContext)
+    const handleLogout = () => {
+        setUserLogged(false)
+        navigate("/")
+    }
+    return (
+        <nav>
+            <ul>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/profile">Profile</Link>
+                </li>
+                <li>
+                {userLogged ?
+                    (<button onClick={handleLogout}>Logout</button>) :
+                    (<Link to="/login">Login</Link>) 
+                }
+                </li>
+                <li>
+                    <Link to="/register">Register</Link>
+                </li>
+            </ul>
+        </nav>
+    );
 };
 
 export default Nav;
