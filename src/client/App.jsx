@@ -3,21 +3,26 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
-import AddUserForm from "./components/AddUserForm";
+import Register from "./components/Register";
+import { createContext } from "react";
 
+export const UserContext = createContext()
 function App() {
-  const [count, setCount] = useState(0);
+  const [userLogged, setUserLogged] = useState(false);
 
   return (
-    <>
+    <UserContext.Provider value={{userLogged, setUserLogged}}>
       <Nav />
 
       <Routes>
         <Route path="/" element={<Home />} />
+        
         <Route path="/login" element={<Login />} />
+
+        <Route path="/register" element={<Register />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
       </Routes>
-    </>
+    </UserContext.Provider >
   );
 }
 
