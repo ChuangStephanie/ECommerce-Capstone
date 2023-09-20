@@ -11,9 +11,10 @@ export default function Home() {
   useEffect(() => {
     async function getAllProducts() {
       const response = await fetchAllProducts();
+      console.log("test", fetchAllProducts());
       if (response) {
         setProducts(response);
-        console.log("Products response:", response)
+        console.log("Products response:", response);
       } else {
         setError(console.log("No products found"));
       }
@@ -21,6 +22,10 @@ export default function Home() {
     getAllProducts();
   },[]);
 
-  
+  return (
+    <>
+    
+    </>
+  )
 
 }
