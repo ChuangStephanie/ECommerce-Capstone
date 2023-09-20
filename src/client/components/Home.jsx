@@ -13,12 +13,14 @@ export default function Home() {
       const response = await fetchAllProducts();
       if (response) {
         setProducts(response);
-        console.log("Response:", response)
+        console.log("Products response:", response)
       } else {
         setError(console.log("No products found"));
       }
     }
     getAllProducts();
   },[]);
+
+  
 
 }
