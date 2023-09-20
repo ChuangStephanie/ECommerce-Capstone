@@ -17,7 +17,7 @@ const Nav = () => {
                     <Link to="/">Home</Link>
                 </li>
                 <li>
-                    <Link to="/profile">Profile</Link>
+                    <Link to="/cart">Cart</Link>
                 </li>
                 <li>
                 {userLogged ?
@@ -28,6 +28,7 @@ const Nav = () => {
                 <li>
                     <Link to="/register">Register</Link>
                 </li>
+
             </ul>
         </nav>
     );
