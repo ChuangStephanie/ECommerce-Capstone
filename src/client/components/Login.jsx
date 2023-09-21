@@ -42,7 +42,10 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     login();
+    const navigate = useNavigate();
+  navigate("/home")
   };
+
 
   return (
     <div>
@@ -69,9 +72,11 @@ const Login = () => {
           />
         </div>
         <button type='submit'>Login</button>
+        <button onClick={() => navigate("/Register")}>Sign up here</button>
       </form>
       <p>{message}</p>
     </div>
+
   );
 };
 
