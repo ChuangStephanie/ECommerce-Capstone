@@ -25,9 +25,9 @@ const Nav = () => {
                     (<Link to="/login">Login</Link>) 
                 }
                 </li>
-                <li>
+                {/* <li>
                     <Link to="/register">Register</Link>
-                </li>
+                </li> */}
 
             </ul>
         </nav>
