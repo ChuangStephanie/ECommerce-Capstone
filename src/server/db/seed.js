@@ -33,6 +33,12 @@ const users = [
     password: 'password123',
     isAdmin: false
   },
+  {
+    name: 'Jamie Chuang',
+    email: 'MxJChuang@money.com',
+    password: 'morbidcuriosity',
+    isAdmin: true
+  }
 ]
 
 const products = [

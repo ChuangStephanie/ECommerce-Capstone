@@ -2,6 +2,7 @@ const express = require('express');
 const apiRouter = express.Router();
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env
+const { getUserById } = require('../db')
 
 
 const volleyball = require('volleyball')
@@ -10,7 +11,7 @@ apiRouter.use(volleyball)
 
 // TO BE COMPLETED - set `req.user` if possible, using token sent in the request header
 apiRouter.use(async (req, res, next) => {
-  const prefix = 'Bearer';
+  const prefix = 'Bearer ';
   const auth = req.header('Authorization');
   
   if (!auth) { 
@@ -42,6 +43,14 @@ apiRouter.use(async (req, res, next) => {
       message: `Authorization token must start with 'Bearer'`
     });
   }
+});
+
+apiRouter.use((req, res, next) => {
+  if (req.user) {
+    console.log('User is set:', req.user);
+  }
+
+  next();
 });
 
 const usersRouter = require('./users');

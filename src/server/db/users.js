@@ -78,8 +78,8 @@ async function getUserById(userId) {
   try {
     const {
       rows: [user],
-    } = await client.query(`
-        SELECT id, username, name, location, active
+    } = await db.query(`
+        SELECT id, name, email, password, isAdmin
         FROM users
         WHERE id=${userId}
       `)
