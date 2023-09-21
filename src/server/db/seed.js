@@ -66,7 +66,8 @@ const products = [
 const dropTables = async () => {
   try {
     await db.query(`
-      DROP TABLE IF EXISTS users, products;
+      DROP TABLE IF EXISTS users;
+      DROP TABLE IF EXISTS products;
     `)
   } catch (err) {
     throw err
