@@ -23,15 +23,14 @@ export default function Home() {
   }, []);
 
   const productsToDisplay = searchParams
-    ? products.filter((p) =>
-        p.title.toLowerCase().includes(searchParams.toLowerCase())
+    ? products.filter(p =>
+        p.name.toLowerCase().includes(searchParams.toLowerCase())
       )
     : products;
-  console.log("Display", productsToDisplay);
 
   return (
     <>
-      <h2 className="hometitle">Products</h2>
+      <h1 className="hometitle">Products</h1>
       <div className="searchbar">
         <label>
           Search: {""}
@@ -47,7 +46,7 @@ export default function Home() {
         {products &&
           productsToDisplay.map((product) => (
             <div key={product.id} className="indivproduct">
-              <h2>{product.name}</h2>
+              <h3>{product.name}</h3>
               <p>{product.price}</p>
               {/* write if/else code here to control whether or not edit/delete buttons show up */}
               <button>Edit</button>
