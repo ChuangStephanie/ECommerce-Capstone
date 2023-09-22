@@ -16,7 +16,7 @@ export default function Home() {
         setProducts(response);
         console.log("Products response:", response);
       } else {
-        setError(console.log("No products found"));
+        setError(console.error("No products found"));
       }
     }
     getAllProducts();
