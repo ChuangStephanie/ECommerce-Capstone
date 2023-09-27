@@ -8,19 +8,21 @@ const {
     getAllUsers
 } = require('../db');
 
+const { requireUser, requireAdmin } = require('./utils')
+
 const jwt = require('jsonwebtoken')
 
-usersRouter.get('/', async( req, res, next) => {
+  
+usersRouter.get('/', requireAdmin,  async (req, res, next) => {
     try {
-        const users = await getAllUsers();
-
-        res.send({
-            users
-        });
-    } catch ({name, message}) {
-        next({name, message})
+      const users = await getAllUsers();
+      res.send({
+        users
+      });
+    } catch ({ name, message }) {
+      next({ name, message });
     }
-});
+  });
 
 usersRouter.post('/login', async(req, res, next) => {
     const { email, password } = req.body;
@@ -57,7 +59,7 @@ usersRouter.post('/login', async(req, res, next) => {
 });
 
 usersRouter.post('/register', async(req, res, next) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, isAdmin } = req.body;
 
     try {
         const _user = await getUserByEmail(email);
@@ -72,7 +74,8 @@ usersRouter.post('/register', async(req, res, next) => {
         const user = await createUser({
             name,
             email,
-            password
+            password,
+            isAdmin
         });
         
         const token = jwt.sign({

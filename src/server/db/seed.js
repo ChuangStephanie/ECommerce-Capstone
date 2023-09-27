@@ -7,95 +7,65 @@ const users = [
     name: 'Emily Johnson',
     email: 'emily@example.com',
     password: 'securepass',
-    isAdmin: false,
+    isAdmin: false
   },
   {
     name: 'Liu Wei',
     email: 'liu@example.com',
     password: 'strongpass',
-    isAdmin: false,
+    isAdmin: false
   },
   {
     name: 'Isabella García',
     email: 'bella@example.com',
     password: 'pass1234',
-    isAdmin: false,
+    isAdmin: false
   },
   {
     name: 'Mohammed Ahmed',
     email: 'mohammed@example.com',
     password: 'mysecretpassword',
-    isAdmin: false,
+    isAdmin: false
   },
   {
     name: 'John Smith',
     email: 'john@example.com',
     password: 'password123',
-    isAdmin: false,
+    isAdmin: false
   },
   {
     name: 'Jamie Chuang',
     email: 'MxJChuang@money.com',
     password: 'morbidcuriosity',
-    isAdmin: true,
-  },
-  {
-    name: 'Larry David',
-    email: 'Larry@example.com',
-    password: 'password987',
-    isAdmin: false,
-  },
-  {
-    name: 'David Goggins',
-    email: 'Goggins@example.com',
-    password: 'goggins123',
-    isAdmin: false,
-  },
-  {
-    name: 'Joe Rogan',
-    email: 'Rogan@example.com',
-    password: 'rogan456',
-    isAdmin: false,
-  },
-  {
-    name: 'Bijan Robinson',
-    email: 'Bijan@example.com',
-    password: 'bijan789',
-    isAdmin: false,
-  },
-  {
-    name: 'Manny Machado',
-    email: 'manny@example.com',
-    password: 'manny159',
-    isAdmin: false,
-  },
+    isAdmin: true
+  }
 ]
 
 const products = [
   {
     name: 'Product 1',
     price: 19.99,
-    description: 'Description for Product 1',
+    description: 'Description for Product 1' 
   },
   {
     name: 'Product 2',
     price: 29.99,
-    description: 'Description for Product 2',
+    description: 'Description for Product 2'
   },
   {
     name: 'Product 3',
     price: 9.99,
-    description: 'Description for Product 3',
+    description: 'Description for Product 3'
   },
   {
     name: 'Product 4',
     price: 39.99,
-    description: 'Description for Product 4',
+    description: 'Description for Product 4'
   },
   {
     name: 'Product 5',
     price: 49.99,
-    description: 'Description for Product 5',
+    description: 'Description for Product 5'
   },
   {
     name: 'Product 6',
@@ -177,7 +147,8 @@ const products = [
 const dropTables = async () => {
   try {
     await db.query(`
-      DROP TABLE IF EXISTS users, products;
+      DROP TABLE IF EXISTS users;
+      DROP TABLE IF EXISTS products;
     `)
   } catch (err) {
     throw err
@@ -191,7 +162,8 @@ const createTables = async () => {
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) DEFAULT 'name',
         email VARCHAR(255) UNIQUE NOT NULL,
-        password VARCHAR(255) NOT NULL
+        password VARCHAR(255) NOT NULL,
+        isAdmin VARCHAR(255) NOT NULL
       );
 
       CREATE TABLE products(
@@ -213,6 +185,7 @@ const insertUsers = async () => {
         name: user.name,
         email: user.email,
         password: user.password,
+        isAdmin: user.isAdmin
       })
     }
     console.log('User seed data inserted successfully.')
