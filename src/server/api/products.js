@@ -3,6 +3,7 @@ const productsRouter = express.Router()
 
 const jwt = require('jsonwebtoken');
 const { getAllProducts, createProduct, updateProduct, deleteProduct, getSingleProduct } = require('../db/products');
+const { requireAdmin } = require('../api/utils')
 
 productsRouter.get('/', async( req, res, next) => {
     try {
@@ -31,7 +32,7 @@ productsRouter.get('/:id', async(req,res,next)=>{
     }
 })
 
-productsRouter.post('/', async(req,res,next)=>{
+productsRouter.post('/', requireAdmin, async(req,res,next)=>{
     const { name, price, description } = req.body
     try {
         const product = await createProduct({
@@ -50,7 +51,7 @@ productsRouter.post('/', async(req,res,next)=>{
     }
 })
 
-productsRouter.patch('/:id', async(req,res,next)=>{
+productsRouter.patch('/:id', requireAdmin, async(req,res,next)=>{
     const productId = req.params.id
     const { name, price, description } = req.body
     try {
@@ -70,7 +71,7 @@ productsRouter.patch('/:id', async(req,res,next)=>{
     }
 })
 
-productsRouter.delete('/:id', async(req,res,next)=>{
+productsRouter.delete('/:id', requireAdmin, async(req,res,next)=>{
     const productId = req.params.id
     try {
         const product = await deleteProduct(productId);
