@@ -4,14 +4,15 @@ import { fetchSingleProduct } from "../API";
 
 export default function Details() {
   let { id } = useParams();
-  const [product, setProduct] = useState("");
+  const [product, setProduct] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     async function getSingleProduct() {
       const productData = await fetchSingleProduct(id);
       if (productData) {
-        setProduct(productData);
+        console.log("productdata", productData.product);
+        setProduct(productData.product);
       } else {
         setError(console.error("No product fetched"));
       }

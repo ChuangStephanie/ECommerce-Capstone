@@ -12,9 +12,10 @@ export async function fetchAllProducts() {
 
 export async function fetchSingleProduct(productId) {
     try {
-        const response = await fetch(`${baseURL}/api/products`);
+        const response = await fetch(`${baseURL}/api/products/${productId}`);
         const result = response.json();
-        return result.products;
+        console.log("single product", result);
+        return result;
     } catch (error) {
         console.error("No product was fetched", error);
     }
