@@ -6,6 +6,17 @@ export async function fetchAllProducts() {
         const result =  await response.json();
         return result.products;
     } catch (error) {
-        console.log(error, "No products were fetched");
+        console.error(error, "No products were fetched");
+    }
+}
+
+export async function fetchSingleProduct(productId) {
+    try {
+        const response = await fetch(`${baseURL}/api/products/${productId}`);
+        const result = response.json();
+        console.log("single product", result);
+        return result;
+    } catch (error) {
+        console.error("No product was fetched", error);
     }
 }
