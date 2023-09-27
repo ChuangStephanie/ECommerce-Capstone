@@ -6,24 +6,30 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useState("");
+  const [isLoading, setIsLoading] = useState(true); // Initialize loading state
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getAllProducts() {
-      const response = await fetchAllProducts();
-      console.log("test", fetchAllProducts());
-      if (response) {
-        setProducts(response);
-        console.log("Products response:", response);
-      } else {
-        setError(console.error("No products found"));
+      try {
+        const response = await fetchAllProducts();
+        if (response) {
+          setProducts(response);
+          setIsLoading(false); // Set loading state to false when products are loaded
+        } else {
+          setError("No products found");
+          setIsLoading(false); // Set loading state to false when there's an error
+        }
+      } catch (error) {
+        setError("Error loading products");
+        setIsLoading(false); // Set loading state to false when there's an error
       }
     }
     getAllProducts();
   }, []);
 
   const productsToDisplay = searchParams
-    ? products.filter(p =>
+    ? products.filter((p) =>
         p.name.toLowerCase().includes(searchParams.toLowerCase())
       )
     : products;
@@ -42,19 +48,32 @@ export default function Home() {
         </label>
       </div>
 
-      <div className="productscontainer">
-        {products &&
-          productsToDisplay.map((product) => (
-            <div key={product.id} className="indivproduct">
-              <h3><Link to={`/${product.id}`}>{product.name}</Link></h3>
-              <p>{product.price}</p>
-              {/* write if/else code here to control whether or not edit/delete buttons show up */}
-              <button>Edit</button>
-              <button>Delte</button>
-              {/* buttons should only show for admin user */}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          {error ? (
+            <p className="error-message">{error}</p>
+          ) : (
+            <div className="productscontainer">
+              {productsToDisplay.length === 0 ? (
+                <p>No products found. <Link to="/">Go to Home</Link></p>
+              ) : (
+                productsToDisplay.map((product) => (
+                  <div key={product.id} className="indivproduct">
+                    <h3><Link to={`/${product.id}`}>{product.name}</Link></h3>
+                    <p>{product.price}</p>
+                    {/* write if/else code here to control whether or not edit/delete buttons show up */}
+                    <button>Edit</button>
+                    <button>Delete</button>
+                    {/* buttons should only show for admin user */}
+                  </div>
+                ))
+              )}
             </div>
-          ))}
-      </div>
+          )}
+        </>
+      )}
     </>
   );
 }
