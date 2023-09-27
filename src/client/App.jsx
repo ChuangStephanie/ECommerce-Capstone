@@ -5,7 +5,9 @@ import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Details from "./components/Details";
+// import Cart from "./components/Cart"
 import { createContext } from "react";
+import Products from "./components/Products";
 
 export const UserContext = createContext();
 function App() {
@@ -21,9 +23,14 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/register" element={<Register />} />
-
+          
         <Route path="/:id" element={<Details />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
+
+        <Route path="/products" element={<Products />} />
+
+        {/* <Route path="/cart" element={<Cart />} /> */}
+
       </Routes>
     </UserContext.Provider>
   );

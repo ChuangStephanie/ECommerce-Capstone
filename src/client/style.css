@@ -23,7 +23,7 @@ nav ul{
   list-style: none;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 50px;
 }
 
 nav ul li a{
@@ -33,6 +33,23 @@ nav ul li a{
 }
 
 nav ul li a:hover{
-  text-decoration: underline;
+  text-decoration: none;
   color: blue;
 }
+
+.Login-form, .register-form, h2{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.login-btn, .register-btn{
+  box-shadow: 2px 2px 10px 2px;
+}
+
+.register-link{
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
