@@ -9,7 +9,7 @@ const Products = () => {
       fetch(`http://localhost:3000/api/products`)
         .then((response) => response.json())
         .then((data) => {
-          setProducts(data.users); //update this to data.products when backend is done
+          setProducts(data.products); //update this to data.products when backend is done
         });
     }
     getProducts();
@@ -35,7 +35,7 @@ const Products = () => {
       </select>
       {products.map((product) => {
         return (
-          <div key={product.id}>
+          <div key={product.id} className="productscontainer">
             <h3>{product.name}</h3>
             <p>{product.description}</p>
             <p>{product.price}</p>

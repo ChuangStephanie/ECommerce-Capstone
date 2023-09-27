@@ -47,6 +47,7 @@ export default function Home() {
           productsToDisplay.map((product) => (
             <div key={product.id} className="indivproduct">
               <h3>{product.name}</h3>
+              <p>{product.description}</p>
               <p>{product.price}</p>
               {/* write if/else code here to control whether or not edit/delete buttons show up */}
               <button>Edit</button>
