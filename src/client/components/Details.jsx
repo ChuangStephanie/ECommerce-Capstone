@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { fetchSingleProduct } from "../API";
+import Ghost from "../assets/ghost.png";
 
 export default function Details() {
   let { id } = useParams();
@@ -21,16 +22,17 @@ export default function Details() {
   }, [id]);
 
   return (
-    <>
+    <div className="container-1">
       <div className="productdetail">
         {product && (
           <div>
+            <img src={Ghost} alt={product.name} />
             <h2>{product.name}</h2>
             <h4>{product.price}</h4>
             <p>{product.description}</p>
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

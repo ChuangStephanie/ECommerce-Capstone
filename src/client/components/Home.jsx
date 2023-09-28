@@ -32,11 +32,11 @@ export default function Home() {
     ? products.filter((p) =>
         p.name.toLowerCase().includes(searchParams.toLowerCase())
       )
-    : products;
+    : [];
 
   return (
     <>
-      <h1 className="hometitle">Products</h1>
+      <h1 className="hometitle">Lizards Plushies</h1>
       <div className="searchbar">
         <label>
           Search: {""}
@@ -57,6 +57,7 @@ export default function Home() {
           ) : (
             <div className="productscontainer">
               {productsToDisplay.length === 0 ? (
+
                 <p>
                   No products found. <a href="/">Go to Home</a>
                 </p>

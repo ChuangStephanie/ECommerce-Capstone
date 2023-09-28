@@ -1,37 +1,63 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
-
+import NavItem from "./NavItem";
 
 const Nav = () => {
-    const navigate = useNavigate()
-    const { userLogged, setUserLogged } = useContext(UserContext)
-    const handleLogout = () => {
-        setUserLogged(false)
-        navigate("/")
-    }
-    return (
-        <nav>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/cart">Cart</Link>
-                </li>
-                <li>
-                {userLogged ?
-                    (<button onClick={handleLogout}>Logout</button>) :
-                    (<Link to="/login">Login</Link>) 
-                }
-                </li>
-                {/* <li>
-                    <Link to="/register">Register</Link>
-                </li> */}
+  const navigate = useNavigate();
+  const { userLogged, setUserLogged } = useContext(UserContext);
+  const [isHover, setIsHover] = useState(true);
+  
+  const handleLogout = () => {
+    setUserLogged(false);
+    navigate("/");
+  };
 
-            </ul>
-        </nav>
-    );
+  return (
+    <nav className={`${isHover && "onHoverNav"}`}>
+      <ul>
+        <NavItem
+          title="Home"
+          url="/"
+          subItems={[""]}
+          isHover = {isHover}
+          setIsHover = {setIsHover}
+        />
+        <NavItem
+          title="Cart"
+          url="/cart"
+          subItems={["Cart", "Wishlist"]}
+          isHover = {isHover}
+          setIsHover = {setIsHover}
+        />
+        <NavItem
+          title="Products"
+          url="/products"
+          subItems={["Keychains", "Plushies", "On Sale Items"]}
+          isHover = {isHover}
+          setIsHover = {setIsHover}
+        />
+        {userLogged ? (
+            <NavItem
+            title="Logout"
+            url=""
+            subItems={[""]}
+            isHover = {isHover}
+            setIsHover = {setIsHover}
+            onClick={handleLogout}
+          />
+        ) : (
+            <NavItem
+            title="Login"
+            url="/login"
+            subItems={[""]}
+            isHover = {isHover}
+            setIsHover = {setIsHover}
+          />
+        )}
+      </ul>
+    </nav>
+  );
 };
 
 export default Nav;
