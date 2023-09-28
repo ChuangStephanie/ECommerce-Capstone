@@ -57,7 +57,7 @@ export default function Home() {
           ) : (
             <div className="productscontainer">
               {productsToDisplay.length === 0 ? (
-                <p>No products found. <Link to="/">Go to Home</Link></p>
+                <p>No products found. <a href="/">Go to Home</a>
               ) : (
                 productsToDisplay.map((product) => (
                   <div key={product.id} className="indivproduct">
