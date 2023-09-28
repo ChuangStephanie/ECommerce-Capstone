@@ -39,6 +39,32 @@ const getUser = async ({ email, password }) => {
   }
 }
 
+const updateUser = async (userId, updatedUserData) => {
+  try {
+    const { name, email, password, isAdmin } = updatedUserData;
+
+    const query = `
+      UPDATE users
+      SET name = $1, email = $2, password = $3, isAdmin = $4
+      WHERE id = $5
+      RETURNING *;
+    `;
+
+    const values = [name, email, password, isAdmin, userId];
+
+    const { rows: [updatedUser] } = await db.query(query, values);
+
+    if (!updatedUser) {
+      throw new Error('Product not found');
+    }
+
+    return updatedUser;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 const getAllUsers = async () => {
   try {
     const query = `
