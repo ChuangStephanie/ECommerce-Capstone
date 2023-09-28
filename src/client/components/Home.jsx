@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // Import Link from react-router-dom
 import { fetchAllProducts } from "../API";
 
 export default function Home() {
@@ -57,11 +57,16 @@ export default function Home() {
           ) : (
             <div className="productscontainer">
               {productsToDisplay.length === 0 ? (
-                <p><Link to="/">Go to Home</Link></p>
+
+                <p>
+                  No products found. <a href="/">Go to Home</a>
+                </p>
               ) : (
                 productsToDisplay.map((product) => (
                   <div key={product.id} className="indivproduct">
-                    <h3><Link to={`/${product.id}`}>{product.name}</Link></h3>
+                    <h3>
+                      <Link to={`/${product.id}`}>{product.name}</Link>
+                    </h3>
                     <p>{product.price}</p>
                     {/* write if/else code here to control whether or not edit/delete buttons show up */}
                     <button>Edit</button>
