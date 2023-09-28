@@ -1,11 +1,10 @@
 const stripe = require('stripe')('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');
 const express = require('express');
-const app = express();
-app.use(express.static('public'));
+const stripeRouter = express.Router();
 
 const YOUR_DOMAIN = 'http://localhost:3000';
 
-app.post('/create-checkout-session', async (req, res) => {
+stripeRouter.post('/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
@@ -22,4 +21,4 @@ app.post('/create-checkout-session', async (req, res) => {
   res.redirect(303, session.url);
 });
 
-app.listen(4242, () => console.log('Running on port 4242'));
+stripeRouter.listen(4242, () => console.log('Running on port 3000'));
