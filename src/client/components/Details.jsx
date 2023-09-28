@@ -1,25 +1,25 @@
-import { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { fetchSingleProduct } from "../API";
-import Ghost from "../assets/ghost.png";
+import { useState, useEffect } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
+import { fetchSingleProduct } from '../API'
+import Ghost from '../assets/ghost.png'
 
 export default function Details() {
-  let { id } = useParams();
-  const [product, setProduct] = useState([]);
-  const [error, setError] = useState(null);
+  let { id } = useParams()
+  const [product, setProduct] = useState([])
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     async function getSingleProduct() {
-      const productData = await fetchSingleProduct(id);
+      const productData = await fetchSingleProduct(id)
       if (productData) {
-        console.log("productdata", productData.product);
-        setProduct(productData.product);
+        console.log('productdata', productData.product)
+        setProduct(productData.product)
       } else {
-        setError(console.error("No product fetched"));
+        setError(console.error('No product fetched'))
       }
     }
-    getSingleProduct();
-  }, [id]);
+    getSingleProduct()
+  }, [id])
 
   return (
     <div className="container-1">
@@ -32,7 +32,10 @@ export default function Details() {
             <p>{product.description}</p>
           </div>
         )}
+        <form action="/create-checkout-session" method="POST">
+          <button type="submit">Checkout</button>
+        </form>
       </div>
     </div>
-  );
+  )
 }
