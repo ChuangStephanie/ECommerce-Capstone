@@ -32,6 +32,9 @@ nav {
   display: flex;
   justify-content: center;
   padding: 40px 0;
+  position: sticky;
+  top: 0;
+  min-height: 200px;
 }
 
 nav ul {
@@ -98,8 +101,8 @@ h2 {
 }
 
 .onHoverNav {
-  background-color: aquamarine;
-  transition: 1s all ease-in-out;
+  background-color: whitesmoke;
+  transition: 0.5s all ease-in-out;
 }
 
 .productswrapper {
@@ -147,4 +150,13 @@ h2 {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
+}
+
+.products-title  {
+  text-align: center;
+}
+
+.sort-wrapper {
+  margin-bottom: 20px;
+  text-align: right;
 }

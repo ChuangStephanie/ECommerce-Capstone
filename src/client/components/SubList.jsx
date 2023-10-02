@@ -6,7 +6,7 @@ const SubList = ({subItems}) => {
     <ul className={`sublist`}>
       {subItems.length > 0 && subItems.map((subItem, index) => (
         <li key={index}>
-            {subItem}
+            <Link to={`/category/${subItem.link}`}>{subItem.title}</Link>
         </li>
       ))}
     </ul>

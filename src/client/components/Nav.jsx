@@ -1,17 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import NavItem from "./NavItem";
+import { fetchAllProducts } from "../API";
 
 const Nav = () => {
   const navigate = useNavigate();
   const { userLogged, setUserLogged } = useContext(UserContext);
   const [isHover, setIsHover] = useState(true);
+
   
   const handleLogout = () => {
     setUserLogged(false);
     navigate("/");
   };
+
+
+//   const productsToDisplay = searchParams
+//     ? products.filter((p) =>
+//         p.name.toLowerCase().includes(searchParams.toLowerCase())
+//       )
+//     : [];
+// bringing searchbar into navbar
 
   return (
     <nav className={`${isHover && "onHoverNav"}`}>
@@ -26,14 +36,14 @@ const Nav = () => {
         <NavItem
           title="Cart"
           url="/cart"
-          subItems={["Cart", "Wishlist"]}
+          subItems={[{title:"Cart", link: "/cart"}, {title:"Wishlist", link: "wishlist"}]}
           isHover = {isHover}
           setIsHover = {setIsHover}
         />
         <NavItem
           title="Products"
           url="/products"
-          subItems={["Keychains", "Plushies", "On Sale Items"]}
+          subItems={[{title: "Keychains", link: "keychains"}, {title: "Plushies", link: "plushies"}, {title: "On Sale Items", link: "on-sale-items"}]}
           isHover = {isHover}
           setIsHover = {setIsHover}
         />

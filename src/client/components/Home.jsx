@@ -59,7 +59,7 @@ export default function Home() {
               {productsToDisplay.length === 0 ? (
 
                 <p>
-                  No products found. <a href="/">Go to Home</a>
+                  {/* No products found. <a href="/">Go to Home</a> */}
                 </p>
               ) : (
                 productsToDisplay.map((product) => (

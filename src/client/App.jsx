@@ -8,6 +8,9 @@ import Details from "./components/Details";
 // import Cart from "./components/Cart"
 import { createContext } from "react";
 import Products from "./components/Products";
+import Keychains from "./components/Keychains";
+import OnSale from "./components/OnSale";
+import Plushies from "./components/Plushies";
 
 export const UserContext = createContext();
 function App() {
@@ -28,6 +31,12 @@ function App() {
         {/* <Route path="/profile" element={<Profile />} /> */}
 
         <Route path="/products" element={<Products />} />
+
+        <Route path="/category/keychains" element={<Keychains />} />
+
+        <Route path="/category/on-sale-items" element={<OnSale />} />
+
+        <Route path="/category/plushies" element={<Plushies />} />
 
         {/* <Route path="/cart" element={<Cart />} /> */}
 
