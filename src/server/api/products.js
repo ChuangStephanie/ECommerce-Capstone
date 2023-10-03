@@ -38,7 +38,9 @@ productsRouter.post('/', requireAdmin, async(req,res,next)=>{
         const product = await createProduct({
             name,
             price,
-            description
+            description,
+            category,
+            onSale
         });
 
         res.send(
@@ -58,7 +60,9 @@ productsRouter.patch('/:id', requireAdmin, async(req,res,next)=>{
         const product = await updateProduct(productId, {
             name,
             price,
-            description
+            description,
+            category,
+            onSale
         });
 
         res.send(

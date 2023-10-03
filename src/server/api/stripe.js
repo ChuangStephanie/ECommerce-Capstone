@@ -4,21 +4,51 @@ const stripeRouter = express.Router();
 
 const YOUR_DOMAIN = 'http://localhost:3000';
 
-stripeRouter.post('/create-checkout-session', async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: '{{PRICE_ID}}',
-        quantity: 1,
-      },
-    ],
-    mode: 'payment',
-    success_url: `${YOUR_DOMAIN}/success.html`,
-    cancel_url: `${YOUR_DOMAIN}/cancel.html`,
-  });
+const app = express();
+app.use(cors());
+app.use(express.static("public"));
+app.use(express.json());
 
-  res.redirect(303, session.url);
+app.post("/checkout", async (req, res) => {
+    /*
+    req.body.items
+    [
+        {
+            id: 1,
+            quantity: 3
+        }
+    ]
+
+    stripe wants
+    [
+        {
+            price: 1,
+            quantity: 3
+        }
+    ]
+    */
+    console.log(req.body);
+    const items = req.body.items;
+    let lineItems = [];
+    items.forEach((item)=> {
+        lineItems.push(
+            {
+                price: item.id,
+                quantity: item.quantity
+            }
+        )
+    });
+
+    const session = await stripe.checkout.sessions.create({
+        line_items: lineItems,
+        mode: 'payment',
+        success_url: "http://localhost:3000/success",
+        cancel_url: "http://localhost:3000/cancel"
+    });
+
+    res.send(JSON.stringify({
+        url: session.url
+    }));
 });
 
-stripeRouter.listen(4242, () => console.log('Running on port 3000'));
+app.listen(4000, () => console.log("Listening on port 4000!"));

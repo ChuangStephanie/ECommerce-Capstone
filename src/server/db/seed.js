@@ -45,27 +45,37 @@ const products = [
   {
     name: 'Product 1',
     price: 19.99,
-    description: 'Description for Product 1' 
+    description: 'Description for Product 1',
+    category: 'Plushy',
+    onSale: false
   },
   {
     name: 'Product 2',
     price: 29.99,
-    description: 'Description for Product 2'
+    description: 'Description for Product 2',
+    category: 'Keychain',
+    onSale: false
   },
   {
     name: 'Product 3',
     price: 9.99,
-    description: 'Description for Product 3'
+    description: 'Description for Product 3',
+    category: 'Plushy',
+    onSale: true
   },
   {
     name: 'Product 4',
     price: 39.99,
-    description: 'Description for Product 4'
+    description: 'Description for Product 4',
+    category: 'Keychain',
+    onSale: false
   },
   {
     name: 'Product 5',
     price: 49.99,
-    description: 'Description for Product 5'
+    description: 'Description for Product 5',
+    category: 'Plushy',
+    onSale: true
   },
 ]
 
@@ -95,7 +105,9 @@ const createTables = async () => {
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         price NUMERIC(10, 2) NOT NULL,
-        description TEXT
+        description TEXT,
+        category TEXT,
+        onSale VARCHAR(255) NOT NULL
       );
     `)
   } catch (err) {
@@ -126,6 +138,8 @@ const insertProducts = async () => {
         name: product.name,
         price: product.price,
         description: product.description,
+        category: product.category,
+        onSale: product.onSale
       })
     }
     console.log('Product seed data inserted successfully.')
