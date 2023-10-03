@@ -9,7 +9,9 @@ export default function Home() {
   return (
     <>
       <h1 className="hometitle">Lizards Plushies</h1>
-      
+      <h3>
+        Welcome to Lizards Plushies, Your one stop shop for everything Plushy.
+      </h3>
 
       
     </>
