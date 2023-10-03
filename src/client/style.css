@@ -173,11 +173,11 @@ nav .searchbar .productscontainer {
 }
 
 .hometitle {
-  
+  text-align: center;
   text-transform: uppercase;
-  background: linear-gradient(to right, #30d045 0%, #5f07ca 100%);
-  text-transform: uppercase;
-	 /* background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+  background: radial-gradient(circle, #30d045 0%, #7300ff 40%);
+  /* text-transform: uppercase;
+	 background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
 	 -webkit-background-clip: text;
 	 -webkit-text-fill-color: transparent; */
   -webkit-background-clip: text;
