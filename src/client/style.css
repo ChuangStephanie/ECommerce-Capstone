@@ -1,19 +1,24 @@
+/* Reset default margin and padding for all elements */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Make links display as blocks for better click areas */
 a {
   display: block;
 }
 
+/* Base styles for the entire app */
 .App {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh; /* Changed to min-height to allow content to push down */
+  overflow: hidden; /* Added to prevent body content from moving */
+  position: relative; /* Added */
 }
 
 .App-header {
@@ -25,21 +30,23 @@ a {
   width: 250px;
 }
 
-/* Add more styling for other elements if needed */
+/* Navigation bar styles */
 nav {
   text-align: center;
   min-width: 100%;
   display: flex;
   justify-content: center;
   padding: 40px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  /* justify-content: center;
-  gap: 50px; */
-  /* width: 100%; */
 }
 
 nav ul li {
@@ -66,6 +73,7 @@ nav ul li a:hover {
   color: blue;
 }
 
+/* Login and Register form styles */
 .Login-form,
 .register-form,
 h2 {
@@ -90,18 +98,13 @@ h2 {
   flex-direction: column;
   padding-top: 10px;
   gap: 10px;
-
 }
 
 .sublist.hide {
   display: none;
 }
 
-.onHoverNav {
-  background-color: aquamarine;
-  transition: 1s all ease-in-out;
-}
-
+/* Styles for product display */
 .productswrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -118,7 +121,7 @@ h2 {
 }
 
 .productdetail {
-  text-align: center
+  text-align: center;
 }
 
 .productdetail img {
@@ -127,6 +130,7 @@ h2 {
   object-fit: contain;
 }
 
+/* Responsive styles */
 @media screen and (max-width: 820px) {
   .productswrapper {
     grid-template-columns: repeat(3, 1fr);
@@ -147,4 +151,16 @@ h2 {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
+}
+
+/* Navigation bar hover effect */
+.onHoverNav {
+  background-color: whitesmoke;
+  transition: 1s all ease-in-out;
+  position: fixed;
+}
+
+/* Body content styles */
+body {
+  margin-top: 120px; /* Adjust this value to control the space between nav and content */
 }
