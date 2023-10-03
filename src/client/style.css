@@ -160,3 +160,26 @@ h2 {
   margin-bottom: 20px;
   text-align: right;
 }
+
+.searchbar {
+  position: relative;
+}
+
+nav .searchbar .productscontainer {
+  position: absolute;
+  bottom: -30px;
+  max-height: 120px;
+  overflow: scroll;
+}
+
+.hometitle {
+  
+  text-transform: uppercase;
+  background: linear-gradient(to right, #30d045 0%, #5f07ca 100%);
+  text-transform: uppercase;
+	 /* background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+	 -webkit-background-clip: text;
+	 -webkit-text-fill-color: transparent; */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
