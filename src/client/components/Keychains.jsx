@@ -2,7 +2,7 @@ import React from 'react'
 
 const Keychains = () => {
   return (
-    <div>Keychains</div>
+    <div><h2>Keychains</h2></div>
   )
 }
 
