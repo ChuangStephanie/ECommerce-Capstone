@@ -1,14 +1,14 @@
 const db = require('./client');
 
-const createProduct = async ({ name, price, description }) => {
+const createProduct = async ({ name, price, description, category, onSale }) => {
   try {
     const query = `
-      INSERT INTO products (name, price, description)
-      VALUES ($1, $2, $3)
+      INSERT INTO products (name, price, description, category, onSale)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
     `;
 
-    const values = [name, price, description];
+    const values = [name, price, description, category, onSale];
 
     const { rows: [product] } = await db.query(query, values);
 
@@ -56,16 +56,16 @@ const getSingleProduct = async (productId) => {
 
 const updateProduct = async (productId, updatedProductData) => {
   try {
-    const { name, price, description } = updatedProductData;
+    const { name, price, description, category, onSale } = updatedProductData;
 
     const query = `
       UPDATE products
-      SET name = $1, price = $2, description = $3
-      WHERE id = $4
+      SET name = $1, price = $2, description = $3, category = $4, onSale = $5
+      WHERE id = $6
       RETURNING *;
     `;
 
-    const values = [name, price, description, productId];
+    const values = [name, price, description, category, onSale, productId];
 
     const { rows: [updatedProduct] } = await db.query(query, values);
 
