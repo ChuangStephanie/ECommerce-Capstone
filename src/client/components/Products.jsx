@@ -40,12 +40,14 @@ const Products = () => {
 
   return (
     <div className="container-1">
-      <h1>Products</h1>
+      <h1 className="products-title">Products</h1>
+      <div className="sort-wrapper">
       <label htmlFor="filter">Sort By</label>
       <select name="filter" id="filter" onChange={handleChange}>
         <option value="hightolow">$High to Low</option>
         <option value="lowtohigh">$Low to High</option>
       </select>
+      </div>
       <div className="productswrapper">
         {products.map((product) => {
           return (
