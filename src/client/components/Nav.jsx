@@ -20,7 +20,7 @@ const Nav = () => {
     getAllProducts,
     productsToDisplay,
   } = useContext(UserContext);
-  const [isHover, setIsHover] = useState(true);
+  const [isHover, setIsHover] = useState(false);
 
   const handleLogout = () => {
     setUserLogged(false);
@@ -35,7 +35,8 @@ const Nav = () => {
   // bringing searchbar into navbar
 
   return (
-    <nav className={`${isHover && "onHoverNav"}`}>
+    <nav>
+      <div className={`list-wrapper ${isHover && "onHoverNav"}`}>
       <ul>
         <NavItem
           title="Home"
@@ -66,14 +67,11 @@ const Nav = () => {
           setIsHover={setIsHover}
         />
         {userLogged ? (
-          <NavItem
-            title="Logout"
-            url=""
-            subItems={[""]}
-            isHover={isHover}
-            setIsHover={setIsHover}
-            onClick={handleLogout}
-          />
+          <li className="list-item">
+          <button className="logout-button" onClick={handleLogout}>
+            Logout
+          </button>
+          </li>
         ) : (
           <NavItem
             title="Login"
@@ -118,6 +116,7 @@ const Nav = () => {
           )}
         </div>
       </ul>
+      </div>
     </nav>
   );
 };

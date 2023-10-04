@@ -14,6 +14,7 @@ const Products = () => {
       try {
         const response = await fetchAllProducts();
         if (response) {
+          console.log(response)
           setProducts(response);
           setIsLoading(false); // Set loading state to false when products are loaded
         } else {

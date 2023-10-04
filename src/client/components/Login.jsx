@@ -3,6 +3,7 @@ import { UserContext } from '../App';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate()
   const { userLogged, setUserLogged } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,6 +47,7 @@ const Login = () => {
       setEmail('');
       setPassword('');
       setUserLogged(true);
+      navigate ("/")
     } catch (err) {
       console.error(`${err.name}: ${err.message}`);
     }
