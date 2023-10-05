@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./components/Login";
-import Nav from "./components/Nav";
+import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Details from "./components/Details";
-// import Cart from "./components/Cart"
+import Cart from "./components/Cart"
 import { createContext } from "react";
 import Products from "./components/Products";
 import Keychains from "./components/Keychains";
@@ -51,7 +51,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{ userLogged, setUserLogged, products, setProducts, error, setError, searchParams, setSearchParams, isLoading, setIsLoading, getAllProducts, productsToDisplay }}>
-      <Nav />
+      <ResponsiveAppBar />
 
       <Routes>
         <Route path="/" element={<Home />} />

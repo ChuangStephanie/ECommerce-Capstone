@@ -4,10 +4,18 @@
   box-sizing: border-box;
 }
 
+body {
+  margin-bottom: 20px;
+}
+
 a, button{
   display: block;
   font-family: 'Times New Roman', Times, serif;
   font-size: 16px;
+}
+
+img {
+  width: 100%;
 }
 
 .App {
@@ -199,7 +207,7 @@ nav .searchbar .productscontainer {
 .hometitle {
   text-align: center;
   text-transform: uppercase;
-  background: radial-gradient(circle, #30d045 0%, #7300ff 40%);
+  background: radial-gradient(circle, #30d045 0%, #7300ff 100%);
   /* text-transform: uppercase;
 	 background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
 	 -webkit-background-clip: text;
@@ -207,4 +215,15 @@ nav .searchbar .productscontainer {
    background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.about-section img {
+  
+  height: 100%;
+  object-fit: cover;
+  box-shadow: 5px 5px 1px aqua ;
+}
+
+.banner img {
+  object-fit: cover;
 }
