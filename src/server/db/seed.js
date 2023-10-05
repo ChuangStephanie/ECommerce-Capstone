@@ -47,35 +47,40 @@ const products = [
     price: 19.99,
     description: 'Description for Product 1',
     category: 'Plushy',
-    onSale: false
+    onSale: false, 
+    image: 'https://i.imgur.com/FHfjUae.png'
   },
   {
     name: 'Product 2',
     price: 29.99,
     description: 'Description for Product 2',
     category: 'Keychain',
-    onSale: false
+    onSale: false,
+    image: 'https://i.imgur.com/FHfjUae.png'
   },
   {
     name: 'Product 3',
     price: 9.99,
     description: 'Description for Product 3',
     category: 'Plushy',
-    onSale: true
+    onSale: true,
+    image: 'https://i.imgur.com/FHfjUae.png'
   },
   {
     name: 'Product 4',
     price: 39.99,
     description: 'Description for Product 4',
     category: 'Keychain',
-    onSale: false
+    onSale: false,
+    image: 'https://i.imgur.com/FHfjUae.png'
   },
   {
     name: 'Product 5',
     price: 49.99,
     description: 'Description for Product 5',
     category: 'Plushy',
-    onSale: true
+    onSale: true,
+    image: 'https://i.imgur.com/FHfjUae.png'
   },
 ]
 
@@ -107,7 +112,8 @@ const createTables = async () => {
         price NUMERIC(10, 2) NOT NULL,
         description TEXT,
         category TEXT,
-        onSale VARCHAR(255) NOT NULL
+        onSale VARCHAR(255) NOT NULL,
+        image TEXT
       );
     `)
   } catch (err) {
@@ -139,7 +145,8 @@ const insertProducts = async () => {
         price: product.price,
         description: product.description,
         category: product.category,
-        onSale: product.onSale
+        onSale: product.onSale,
+        image: product.image
       })
     }
     console.log('Product seed data inserted successfully.')

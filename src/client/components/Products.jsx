@@ -2,12 +2,45 @@ import React, { useState, useEffect } from "react";
 import { fetchAllProducts } from "../API";
 import Ghost from "../assets/ghost.png";
 import { Link } from "react-router-dom";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Typography,
+  IconButton,
+} from "@mui/material";
+
+import { styled } from '@mui/system';
+
+const useStyles = styled('div')({
+  root: {
+    maxWidth: "100%",
+  },
+  media: {
+    height: 0,
+    paddingTop: "56.25%", // 16:9
+  },
+  cardActions: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  cardContent: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+});
+
+
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [filterBy, setFilterBy] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const classes = useStyles
+  
+
 
   useEffect(() => {
     async function getAllProducts() {
@@ -27,6 +60,7 @@ const Products = () => {
     }
     getAllProducts();
   }, []);
+
   const handleChange = (e) => {
     setFilterBy(e.target.value);
     let filterProducts = products;
@@ -52,12 +86,36 @@ const Products = () => {
         {products.map((product) => {
           return (
             <Link to={`/products/${product.id}`} key={product.id}>
-            <div className="productContent">
-              <img src={Ghost} alt={product.name} />
-              <h3>{product.name}</h3>
-              <p>{product.description}</p>
-              <p>{product.price}</p>
-            </div>
+                  <Card className={classes.root}>
+      <CardMedia
+        component="img"
+        className={classes.media}
+        image={product.image}
+        title={product.name}
+      />
+      <CardContent>
+        <div className={classes.cardContent}>
+          <Typography variant="h5" gutterBottom>
+            {product.name}
+          </Typography>
+          <Typography variant="h5">
+            {product.price}
+          </Typography>
+        </div>
+        <Typography
+          dangerouslySetInnerHTML={{ __html: product.description }}
+          variant="body2"
+          color="textSecondary"
+        />
+      </CardContent>
+      <CardActions disableSpacing className={classes.cardActions}>
+        <IconButton
+          aria-label="Add to Cart"
+          onClick={() => onAddToCart(product.id, 1)}
+        >
+        </IconButton>
+      </CardActions>
+    </Card>
             </Link>
           );
         })}
