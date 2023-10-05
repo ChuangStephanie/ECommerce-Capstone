@@ -7,7 +7,7 @@ import Register from "./components/Register";
 import Details from "./components/Details";
 import Cart from "./components/Cart"
 import { createContext } from "react";
-import Products from "./components/Products";
+import Products from "./components/Products/";
 import Keychains from "./components/Keychains";
 import OnSale from "./components/OnSale";
 import Plushies from "./components/Plushies";
