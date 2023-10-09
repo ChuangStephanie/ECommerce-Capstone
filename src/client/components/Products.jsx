@@ -38,17 +38,25 @@ const Products = () => {
   const [isLoading, setIsLoading] = useState(true);
   const classes = useStyles;
 
-  const addToCart = (product) => {
-    // Here, you should implement the logic to add the product to the cart.
-    // You can use local storage or a state management library to manage the cart items.
-    // For this example, I will use local storage to store cart items.
+   // Function to add a product to the cart
+const addToCart = (product) => {
+  // Retrieve existing cart items from local storage or initialize an empty array
+  const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
-    const existingCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  // Check if the product is already in the cart
+  const existingItemIndex = cartItems.findIndex((item) => item.id === product.id);
 
-    const updatedCartItems = [...existingCartItems, { ...product, quantity: 1 }];
-    
-    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
-  };
+  if (existingItemIndex !== -1) {
+    // If the product is already in the cart, update its quantity
+    cartItems[existingItemIndex].quantity += 1;
+  } else {
+    // If the product is not in the cart, add it with a quantity of 1
+    cartItems.push({ ...product, quantity: 1 });
+  }
+
+  // Save the updated cart items back to local storage
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+};
 
   useEffect(() => {
     async function getAllProducts() {
