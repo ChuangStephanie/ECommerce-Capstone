@@ -3,8 +3,7 @@
 // Sign in to see your own test API key embedded in code samples.
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 const express = require('express');
-const app = express();
-app.use(express.static('public'));
+const app = express.Router();
 
 const YOUR_DOMAIN = 'http://localhost:3000';
 

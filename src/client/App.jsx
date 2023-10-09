@@ -71,7 +71,7 @@ function App() {
 
         <Route path="/category/plushies" element={<Plushies />} />
 
-        {/* <Route path="/cart" element={<Cart />} /> */}
+        <Route path="/cart" element={<Cart />} />
 
       </Routes>
     </UserContext.Provider>
