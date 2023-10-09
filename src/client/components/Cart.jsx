@@ -3,19 +3,29 @@ import React, { useState, useEffect } from 'react';
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
 
+  useEffect(() => {
+    // Retrieve cart items from local storage
+    const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    setCartItems(storedCartItems);
+  }, []);
 
   const removeFromCart = (productId) => {
-    setCartItems(cartItems.filter((item) => item.id !== productId));
+    // Remove the item from the cart and update local storage
+    const updatedCartItems = cartItems.filter((item) => item.id !== productId);
+    setCartItems(updatedCartItems);
+    // Update local storage
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
   };
 
   const updateCartItemQuantity = (productId, quantity) => {
-    setCartItems(
-      cartItems.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
-      )
+    // Update the quantity of the item in the cart and update local storage
+    const updatedCartItems = cartItems.map((item) =>
+      item.id === productId ? { ...item, quantity } : item
     );
+    setCartItems(updatedCartItems);
+    // Update local storage
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
   };
-
 
   const calculateTotalPrice = () => {
     return cartItems.reduce(

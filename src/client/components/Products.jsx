@@ -37,24 +37,17 @@ const Products = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const classes = useStyles;
-  const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
+    // Here, you should implement the logic to add the product to the cart.
+    // You can use local storage or a state management library to manage the cart items.
+    // For this example, I will use local storage to store cart items.
 
-    const existingItem = cartItems.find((item) => item.id === product.id);
-    if (existingItem) {
+    const existingCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    const updatedCartItems = [...existingCartItems, { ...product, quantity: 1 }];
     
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
-      );
-    } else {
-      
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
-    }
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
   };
 
   useEffect(() => {
@@ -63,14 +56,14 @@ const Products = () => {
         const response = await fetchAllProducts();
         if (response) {
           setProducts(response);
-          setIsLoading(false); 
+          setIsLoading(false);
         } else {
           setError('No products found');
-          setIsLoading(false); 
+          setIsLoading(false);
         }
       } catch (error) {
         setError('Error loading products');
-        setIsLoading(false); 
+        setIsLoading(false);
       }
     }
     getAllProducts();
@@ -78,7 +71,7 @@ const Products = () => {
 
   const handleChange = (e) => {
     setFilterBy(e.target.value);
-    let filterProducts = products;
+    let filterProducts = [...products];
     if (e.target.value === 'hightolow') {
       filterProducts.sort((a, b) => b.price - a.price);
     } else if (e.target.value === 'lowtohigh') {
@@ -125,7 +118,7 @@ const Products = () => {
               <CardActions disableSpacing className={classes.cardActions}>
                 <IconButton
                   aria-label="Add to Cart"
-                  onClick={() => addToCart(product)} // Pass the specific product to addToCart
+                  onClick={() => addToCart(product)}
                 >
                   <AddShoppingCartIcon />
                 </IconButton>
