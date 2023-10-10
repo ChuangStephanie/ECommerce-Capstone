@@ -147,6 +147,14 @@ nav ul button.logout-button {
   width: 100%;
 }
 
+.productContent:hover{
+  border: 1px dotted rgba(0,0,0,0);
+  border-radius: 9px; 
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,.3019607843), 0px 4px 8px 3px rgba(0,0,0,.1490196078);
+  transition: transform 200ms cubic-bezier(0.345, 0.115, 0.135, 1.42),opacity 150ms ease-out,border-color 200ms ease-out;
+  padding: 9px;
+}
+
 .container-1 {
   max-width: 90%;
   margin: 0 auto;
@@ -207,23 +215,37 @@ nav .searchbar .productscontainer {
 .hometitle {
   text-align: center;
   text-transform: uppercase;
-  background: radial-gradient(circle, #30d045 0%, #7300ff 100%);
+  color: yellow;
+  /* background: radial-gradient(circle, #30d045 0%, #7300ff 100%); */
+
   /* text-transform: uppercase;
 	 background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
 	 -webkit-background-clip: text;
 	 -webkit-text-fill-color: transparent; */
-   background-clip: text;
+
+   /* background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; */
 }
 
 .about-section img {
-  
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
   box-shadow: 5px 5px 1px aqua ;
 }
 
 .banner img {
   object-fit: cover;
+}
+
+@media screen and (max-width: 1080px){
+  .productswrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px){
+  .productswrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

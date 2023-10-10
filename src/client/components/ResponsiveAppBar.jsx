@@ -1,80 +1,70 @@
-import * as React from 'react'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
-import Container from '@mui/material/Container'
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import Tooltip from '@mui/material/Tooltip'
-import MenuItem from '@mui/material/MenuItem'
-import AdbIcon from '@mui/icons-material/Adb'
-import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
-import { UserContext } from '../App'
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import { Link } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../App';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
-import { Link } from 'react-router-dom'
+import SmallLogo from '../assets/jamscuff_HappyOpen.png'
+
 
 function ResponsiveAppBar() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     userLogged,
-    setUserLogged,
-    products,
-    setProducts,
-    error,
-    setError,
-    searchParams,
-    setSearchParams,
-    isLoading,
-    setIsLoading,
-    getAllProducts,
-    productsToDisplay,
-  } = useContext(UserContext)
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+    setUserLogged
+  } = useContext(UserContext);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleUserLogout = () => {
-    setUserLogged(false)
-  }
 
-  const pages = ['Products']
-  const settings = [
-    { title: 'Home', path: '/' },
-    {
-      title: userLogged ? 'Logout' : 'login',
-      path: userLogged ? handleUserLogout : '/login',
-    },
-  ]
+const handleUserLogout = () => {
+  setUserLogged (false)
+}
+
+const pages = [{title: 'Products', path: '/products'}];
+const settings = [
+  {title: 'Home', path: '/'},
+  {title:  userLogged ? 'Logout' : 'login', path: userLogged ? handleUserLogout : '/login'}
+];
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget)
-  }
+    setAnchorElNav(event.currentTarget);
+  };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget)
-  }
+    setAnchorElUser(event.currentTarget);
+  };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
+    setAnchorElNav(null);
+  };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
+    setAnchorElUser(null);
+  };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Link href="/">
+          <img src={SmallLogo} alt="SmallLogo" style={{width: '50px', height: '50px', marginRight: '5px'}}/>
+          </Link>
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -85,7 +75,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            <h1 className="hometitle">Lizards Plushies</h1>
+            <h1 className='hometitle'>Lizards Plushies</h1>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -118,13 +108,12 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                  <Link href={page.path} textAlign="center">{page.title}</Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -141,20 +130,17 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            <h1 className="hometitle">Lizards Plushies</h1>
+            <h1 className='hometitle'>Lizards Plushies</h1>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.title}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link
-                  to="/products"
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                >
-                  {page}
+                <Link href={page.path} sx={{color: 'white'}}>
+                {page.title}
                 </Link>
               </Button>
             ))}
@@ -182,28 +168,16 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  {setting.title == 'Logout' ? (
-                    <Button
-                      style={{
-                        textTransform: 'capitalize',
-                        fontSize: '14px',
-                        minWidth: 'initial',
-                        padding: '0',
-                      }}
-                      onClick={handleUserLogout}
-                    >
-                      {setting.title}
-                    </Button>
-                  ) : (
-                    <Link
-                      href={`${setting.path}`}
-                      style={{ textDecoration: 'none', fontSize: '14px' }}
-                    >
-                      {setting.title}
-                    </Link>
-                  )}
+              {settings.map((setting) => (             
+                <MenuItem key={setting} onClick=
+                {handleCloseUserMenu}>
+                  {setting.title == 'Logout' ? 
+                <Button style={{textTransform : 'capitalize', fontSize : '14px', minWidth: 'initial', padding: '0'}} onClick={handleUserLogout}>{setting.title}</Button> : 
+                
+                  <Link href={`${setting.path}`} style={{textDecoration : 'none', fontSize : '14px'}}>{setting.title}</Link>
+                  
+                  }
+                  
                 </MenuItem>
               ))}
             </Menu>
@@ -217,6 +191,6 @@ function ResponsiveAppBar() {
         </Toolbar>
       </Container>
     </AppBar>
-  )
+  );
 }
-export default ResponsiveAppBar
+ export default ResponsiveAppBar;

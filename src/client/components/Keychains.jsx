@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import Product from "./Product";
 
-const Keychains = () => {
+const Keychains = ({ products, filterBy }) => {
+  const [keychains, setKeychains] = useState([]);
+  useEffect(() => {
+    const keychainProducts = products.filter(
+      (product) => product.category == "Keychain"
+    );
+    setKeychains(keychainProducts);
+  }, [products, filterBy]);
   return (
-    <div><h2>Keychains</h2></div>
-  )
-}
+    <Box className="productswrapper">
+      {keychains.length > 0 &&
+        keychains.map((product) => {
+          return (
+            <Product product={product} />
+          );
+        })}
+    </Box>
+  );
+};
 
-export default Keychains
+export default Keychains;

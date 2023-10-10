@@ -1,30 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../App';
+import React, { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import Product from "./Product";
 
-const OnSale = () => {
-  const [saleItems, setSaleItems] = useState([])
-  const {
-    products
-  } = useContext(UserContext);
+const OnSale = ({ products, filterBy }) => {
+  const [onSale, setOnSale] = useState([]);
   useEffect(() => {
-    console.log(products)
-  const saleProducts = products.filter(product => product.onsale == "true")
-  setSaleItems(saleProducts)
-  },[])
+    const OnSaleProducts = products.filter(
+      (product) => product.onsale == "true"
+    );
+    setOnSale(OnSaleProducts);
+  }, [products, filterBy]);
   return (
-    <div><h1>OnSale</h1>
-    {saleItems.length > 0 && saleItems.map((saleItem) => (
-      <div>
-      <h3>
-        {saleItem.name}
-      </h3>
-      <p>
-        {saleItem.description}
-      </p>
-      </div>
-    ))}
-    </div>
-  )
-}
+    <Box className="productswrapper">
+      {onSale.length > 0 &&
+        onSale.map((product) => {
+          return <Product product={product} />;
+        })}
+    </Box>
+  );
+};
 
-export default OnSale
+export default OnSale;
