@@ -41,7 +41,7 @@ const handleUserLogout = () => {
   setUserLogged (false)
 }
 
-const pages = ['Products'];
+const pages = [{title: 'Products', path: '/products'}];
 const settings = [
   {title: 'Home', path: '/'},
   {title:  userLogged ? 'Logout' : 'login', path: userLogged ? handleUserLogout : '/login'}
@@ -115,8 +115,8 @@ const settings = [
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                  <Link href={page.path} textAlign="center">{page.title}</Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -143,11 +143,13 @@ const settings = [
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.title}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                <Link href={page.path} sx={{color: 'white'}}>
+                {page.title}
+                </Link>
               </Button>
             ))}
           </Box>
