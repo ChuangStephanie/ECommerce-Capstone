@@ -1,35 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../App';
-import { Box, Link } from '@mui/material';
-import Ghost from "../assets/ghost.png";
+import React, { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import Product from "./Product";
 
-const Keychains = () => {
-  const [keychains, setKeychains] = useState([])
-  const {
-    products
-  } = useContext(UserContext);
+const Keychains = ({ products, filterBy }) => {
+  const [keychains, setKeychains] = useState([]);
   useEffect(() => {
-    console.log(products)
-  const keychainProducts = products.filter(product => product.category == "Keychain")
-  setKeychains(keychainProducts)
-  },[])
+    const keychainProducts = products.filter(
+      (product) => product.category == "Keychain"
+    );
+    setKeychains(keychainProducts);
+  }, [products, filterBy]);
   return (
-    
     <Box className="productswrapper">
-          {keychains.length > 0 && keychains.map((product) => {
-            return (
-              <Link href={`/products/${product.id}`} key={product.id}>
-                <Box className="productContent">
-                  <img src={Ghost} alt={product.name} />
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <p>{product.price}</p>
-                </Box>
-              </Link>
-            );
-          })}
-        </Box>
-  )
-}
+      {keychains.length > 0 &&
+        keychains.map((product) => {
+          return (
+            <Product product={product} />
+          );
+        })}
+    </Box>
+  );
+};
 
-export default Keychains
+export default Keychains;

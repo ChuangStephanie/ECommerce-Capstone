@@ -1,34 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../App';
-import { Box, Link } from '@mui/material';
-import Ghost from "../assets/ghost.png";
+import React, { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import Product from "./Product";
 
-const OnSale = () => {
-  const [onSale, setOnSale] = useState([])
-  const {
-    products
-  } = useContext(UserContext);
+const OnSale = ({ products, filterBy }) => {
+  const [onSale, setOnSale] = useState([]);
   useEffect(() => {
-  const OnSaleProducts = products.filter(product => product.onsale == "true")
-  setOnSale(OnSaleProducts)
-  },[])
+    const OnSaleProducts = products.filter(
+      (product) => product.onsale == "true"
+    );
+    setOnSale(OnSaleProducts);
+  }, [products, filterBy]);
   return (
-    
     <Box className="productswrapper">
-          {onSale.length > 0 && onSale.map((product) => {
-            return (
-              <Link href={`/products/${product.id}`} key={product.id}>
-                <Box className="productContent">
-                  <img src={Ghost} alt={product.name} />
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <p>{product.price}</p>
-                </Box>
-              </Link>
-            );
-          })}
-        </Box>
-  )
-}
+      {onSale.length > 0 &&
+        onSale.map((product) => {
+          return <Product product={product} />;
+        })}
+    </Box>
+  );
+};
 
-export default OnSale
+export default OnSale;

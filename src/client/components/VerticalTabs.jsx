@@ -42,9 +42,9 @@ function a11yProps(index) {
   };
 }
 
-export default function VerticalTabs({products}) {
+export default function VerticalTabs({products, filterBy}) {
   const [value, setValue] = React.useState(0);
-  const [filterProducts, setFilterProducts] = React.useState([])
+  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -68,16 +68,16 @@ export default function VerticalTabs({products}) {
         <Tab label="OnSale" {...a11yProps(3)} />
       </Tabs>
       <TabPanel value={value} index={0} style={{maxWidth: '80%'}}>
-        <AllProducts/>
+        <AllProducts products={products} filterBy={filterBy}/>
       </TabPanel>
       <TabPanel value={value} index={1} style={{maxWidth: '80%'}}>
-        <Keychains/>
+        <Keychains products={products} filterBy={filterBy}/>
       </TabPanel>
       <TabPanel value={value} index={2} style={{maxWidth: '80%'}}>
-        <Plushies/>
+        <Plushies products={products} filterBy={filterBy}/>
       </TabPanel>
       <TabPanel value={value} index={3} style={{maxWidth: '80%'}}>
-        <OnSale/>
+        <OnSale products={products} filterBy={filterBy}/>
       </TabPanel>
     </Box>
   );

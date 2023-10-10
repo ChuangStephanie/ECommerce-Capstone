@@ -11,23 +11,23 @@ const Products = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function getAllProducts() {
-      try {
-        const response = await fetchAllProducts();
-        if (response) {
-          console.log(response);
-          setProducts(response);
-          setIsLoading(false); // Set loading state to false when products are loaded
-        } else {
-          setError("No products found");
-          setIsLoading(false); // Set loading state to false when there's an error
-        }
-      } catch (error) {
-        setError("Error loading products");
+  async function getAllProducts() {
+    try {
+      const response = await fetchAllProducts();
+      if (response) {
+        console.log(response);
+        setProducts(response);
+        setIsLoading(false); // Set loading state to false when products are loaded
+      } else {
+        setError("No products found");
         setIsLoading(false); // Set loading state to false when there's an error
       }
+    } catch (error) {
+      setError("Error loading products");
+      setIsLoading(false); // Set loading state to false when there's an error
     }
+  }
+  useEffect(() => {
     getAllProducts();
   }, []);
   const handleChange = (e) => {
@@ -38,6 +38,7 @@ const Products = () => {
     } else if (e.target.value == "lowtohigh") {
       filterProducts.sort((a, b) => a.price - b.price);
     }
+    console.log(filterProducts)
     setProducts(filterProducts);
   };
 
@@ -47,12 +48,12 @@ const Products = () => {
       <Box className="sort-wrapper">
         <label htmlFor="filter">Sort By</label>
         <select name="filter" id="filter" onChange={handleChange}>
-          <option value="hightolow">$High to Low</option>
           <option value="lowtohigh">$Low to High</option>
+          <option value="hightolow">$High to Low</option>
         </select>
       </Box>
       <Box className="productsContent" >
-        <VerticalTabs products={products}/>
+        <VerticalTabs products={products} filterBy={filterBy}/>
       </Box>
     </Box>
   );

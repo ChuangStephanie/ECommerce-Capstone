@@ -1,35 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../App';
-import { Box, Link } from '@mui/material';
-import Ghost from "../assets/ghost.png";
+import React, { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import Product from "./Product";
 
-const Plushies = () => {
-  const [Plushies, setPlushies] = useState([])
-  const {
-    products
-  } = useContext(UserContext);
+const Plushies = ({ products, filterBy }) => {
+  const [Plushies, setPlushies] = useState([]);
   useEffect(() => {
-    console.log(products)
-  const PlushiesProducts = products.filter(product => product.category == "Plushy")
-  setPlushies(PlushiesProducts)
-  },[])
+    const PlushiesProducts = products.filter(
+      (product) => product.category == "Plushy"
+    );
+    setPlushies(PlushiesProducts);
+  }, [products, filterBy]);
   return (
-    
     <Box className="productswrapper">
-          {Plushies.length > 0 && Plushies.map((product) => {
-            return (
-              <Link href={`/products/${product.id}`} key={product.id}>
-                <Box className="productContent">
-                  <img src={Ghost} alt={product.name} />
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <p>{product.price}</p>
-                </Box>
-              </Link>
-            );
-          })}
-        </Box>
-  )
-}
+      {Plushies.length > 0 &&
+        Plushies.map((product) => {
+          return <Product product={product} />;
+        })}
+    </Box>
+  );
+};
 
-export default Plushies
+export default Plushies;

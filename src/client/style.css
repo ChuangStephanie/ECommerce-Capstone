@@ -147,6 +147,14 @@ nav ul button.logout-button {
   width: 100%;
 }
 
+.productContent:hover{
+  border: 1px dotted rgba(0,0,0,0);
+  border-radius: 9px; 
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,.3019607843), 0px 4px 8px 3px rgba(0,0,0,.1490196078);
+  transition: transform 200ms cubic-bezier(0.345, 0.115, 0.135, 1.42),opacity 150ms ease-out,border-color 200ms ease-out;
+  padding: 9px;
+}
+
 .container-1 {
   max-width: 90%;
   margin: 0 auto;
@@ -228,4 +236,16 @@ nav .searchbar .productscontainer {
 
 .banner img {
   object-fit: cover;
+}
+
+@media screen and (max-width: 1080px){
+  .productswrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px){
+  .productswrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
