@@ -1,73 +1,75 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { fetchSingleProduct } from "../API";
-import Ghost from "../assets/ghost.png";
+import React, { useState, useEffect, useContext } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
+import { fetchSingleProduct } from '../API'
+import Ghost from '../assets/ghost.png'
 
 export default function Details() {
-  const { id } = useParams();
-  const [product, setProduct] = useState([]);
-  const [error, setError] = useState(null);
-  const [cartItems, setCartItems] = useState([]);
+  const { id } = useParams()
+  const [product, setProduct] = useState([])
+  const [error, setError] = useState(null)
+  const [cartItems, setCartItems] = useState([])
 
   const addToCart = (product) => {
-    const existingItem = cartItems.find((item) => item.id === product.id);
-    if (existingItem) {
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
-      );
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || []
+    const existingItemIndex = cartItems.findIndex(
+      (item) => item.id === product.id
+    )
+
+    if (existingItemIndex !== -1) {
+      cartItems[existingItemIndex].quantity += 1
     } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      cartItems.push({ ...product, quantity: 1 })
     }
-  };
+    localStorage.setItem('cartItems', JSON.stringify(cartItems))
+  }
 
   useEffect(() => {
     async function getSingleProductData() {
       try {
-        const productData = await fetchSingleProduct(id);
+        const productData = await fetchSingleProduct(id)
         if (productData) {
-          setProduct(productData.product);
+          setProduct(productData.product)
         } else {
-          setError("No product fetched");
+          setError('No product fetched')
         }
       } catch (error) {
-        setError("Error fetching product data");
+        setError('Error fetching product data')
       }
     }
-    getSingleProductData();
-  }, [id]);
+    getSingleProductData()
+  }, [id])
 
   const handleAddToCart = () => {
-    console.log("Adding to cart:", product);
-    addToCart(product);
-  };
+    console.log('Adding to cart:', product)
+    addToCart(product)
+  }
 
   async function onSubmit() {
-    console.log("something");
+    console.log('something')
     const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: "price_1NzWUZLy2DFROTD9qmeVEB0C",
+            price: 'price_1NzWUZLy2DFROTD9qmeVEB0C',
             quantity: 1,
           },
         ],
       }),
-    };
-    const response = await fetch("http://localhost:3000/create-checkout-session", requestOptions);
+    }
+    const response = await fetch(
+      'http://localhost:3000/create-checkout-session',
+      requestOptions
+    )
   }
 
   const handleClick = async () => {
-    const res = await fetch("http://localhost:3000/create-checkout-session", {
-      method: 'POST', 
+    const res = await fetch('http://localhost:3000/create-checkout-session', {
+      method: 'POST',
       headers: {
-        "Content-Type": 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         // line_items: [
@@ -80,18 +82,18 @@ export default function Details() {
         line_items: [
           {
             price_data: {
-              currency: "usd",
+              currency: 'usd',
               product_data: {
                 name: product.name,
               },
-              unit_amount: parseInt(Math.ceil(product.price*100)),
+              unit_amount: parseInt(Math.ceil(product.price * 100)),
             },
             quantity: 1,
           },
         ],
       }),
     })
-    
+
     const body = await res.json()
     window.location.href = body.url
   }
@@ -108,10 +110,8 @@ export default function Details() {
             <button onClick={handleAddToCart}>Add to Cart</button>
           </div>
         )}
-        <button onClick={handleClick}>
-          Buy Now
-        </button>
+        <button onClick={handleClick}>Buy Now</button>
       </div>
     </div>
-  );
+  )
 }
