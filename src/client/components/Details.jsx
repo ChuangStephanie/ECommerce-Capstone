@@ -64,7 +64,6 @@ export default function Details() {
   }
 
   const handleClick = async () => {
-    console.log(parseInt(String(product.price).replace(".", "")));
     const res = await fetch("http://localhost:3000/create-checkout-session", {
       method: 'POST', 
       headers: {
@@ -85,7 +84,7 @@ export default function Details() {
               product_data: {
                 name: product.name,
               },
-              unit_amount: parseInt(product.price*100),
+              unit_amount: parseInt(Math.ceil(product.price*100)),
             },
             quantity: 1,
           },
@@ -110,7 +109,7 @@ export default function Details() {
           </div>
         )}
         <button onClick={handleClick}>
-          Checkout
+          Buy Now
         </button>
       </div>
     </div>
