@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { fetchSingleProduct } from '../API';
-import Ghost from '../assets/ghost.png';
-
+import React, { useState, useEffect, useContext } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { fetchSingleProduct } from "../API";
+import Ghost from "../assets/ghost.png";
 
 export default function Details() {
   const { id } = useParams();
@@ -11,10 +10,8 @@ export default function Details() {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
-
     const existingItem = cartItems.find((item) => item.id === product.id);
     if (existingItem) {
-
       setCartItems(
         cartItems.map((item) =>
           item.id === product.id
@@ -34,19 +31,71 @@ export default function Details() {
         if (productData) {
           setProduct(productData.product);
         } else {
-          setError('No product fetched');
+          setError("No product fetched");
         }
       } catch (error) {
-        setError('Error fetching product data');
+        setError("Error fetching product data");
       }
     }
     getSingleProductData();
   }, [id]);
 
   const handleAddToCart = () => {
-    console.log('Adding to cart:', product);
+    console.log("Adding to cart:", product);
     addToCart(product);
   };
+
+  async function onSubmit() {
+    console.log("something");
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        line_items: [
+          {
+            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+            price: "price_1NzWUZLy2DFROTD9qmeVEB0C",
+            quantity: 1,
+          },
+        ],
+      }),
+    };
+    const response = await fetch("http://localhost:3000/create-checkout-session", requestOptions);
+  }
+
+  const handleClick = async () => {
+    console.log(parseInt(String(product.price).replace(".", "")));
+    const res = await fetch("http://localhost:3000/create-checkout-session", {
+      method: 'POST', 
+      headers: {
+        "Content-Type": 'application/json'
+      },
+      body: JSON.stringify({
+        // line_items: [
+        //   {
+        //     // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+        //     price: "price_1NzWUZLy2DFROTD9qmeVEB0C",
+        //     quantity: 1,
+        //   },
+        // ],
+        line_items: [
+          {
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: product.name,
+              },
+              unit_amount: parseInt(product.price*100),
+            },
+            quantity: 1,
+          },
+        ],
+      }),
+    })
+    
+    const body = await res.json()
+    window.location.href = body.url
+  }
 
   return (
     <div className="container-1">
@@ -60,9 +109,9 @@ export default function Details() {
             <button onClick={handleAddToCart}>Add to Cart</button>
           </div>
         )}
-        <form action="/create-checkout-session" method="POST">
-          <button type="submit">Checkout</button>
-        </form>
+        <button onClick={handleClick}>
+          Checkout
+        </button>
       </div>
     </div>
   );
