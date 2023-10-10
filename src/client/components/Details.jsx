@@ -1,42 +1,69 @@
-import { useState, useEffect } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
-import { fetchSingleProduct } from '../API'
-import Ghost from '../assets/ghost.png'
-import { Box } from '@mui/material'
+import React, { useState, useEffect, useContext } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import { fetchSingleProduct } from '../API';
+import Ghost from '../assets/ghost.png';
+
 
 export default function Details() {
-  let { id } = useParams()
-  const [product, setProduct] = useState([])
-  const [error, setError] = useState(null)
+  const { id } = useParams();
+  const [product, setProduct] = useState([]);
+  const [error, setError] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (product) => {
+
+    const existingItem = cartItems.find((item) => item.id === product.id);
+    if (existingItem) {
+
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
+  };
 
   useEffect(() => {
-    async function getSingleProduct() {
-      const productData = await fetchSingleProduct(id)
-      if (productData) {
-        console.log('productdata', productData.product)
-        setProduct(productData.product)
-      } else {
-        setError(console.error('No product fetched'))
+    async function getSingleProductData() {
+      try {
+        const productData = await fetchSingleProduct(id);
+        if (productData) {
+          setProduct(productData.product);
+        } else {
+          setError('No product fetched');
+        }
+      } catch (error) {
+        setError('Error fetching product data');
       }
     }
-    getSingleProduct()
-  }, [id])
+    getSingleProductData();
+  }, [id]);
+
+  const handleAddToCart = () => {
+    console.log('Adding to cart:', product);
+    addToCart(product);
+  };
 
   return (
-    <Box className="container-1">
-      <Box className="productdetail" sx={{marginTop: '20px'}}>
+    <div className="container-1">
+      <div className="productdetail">
         {product && (
-          <Box>
+          <div>
             <img src={Ghost} alt={product.name} />
             <h2>{product.name}</h2>
             <h4>{product.price}</h4>
             <p>{product.description}</p>
-          </Box>
+            <button onClick={handleAddToCart}>Add to Cart</button>
+          </div>
         )}
         <form action="/create-checkout-session" method="POST">
           <button type="submit">Checkout</button>
         </form>
-      </Box>
-    </Box>
-  )
+      </div>
+    </div>
+  );
 }
