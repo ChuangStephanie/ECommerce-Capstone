@@ -251,7 +251,116 @@ nav .searchbar .productscontainer {
 .banner img {
   object-fit: cover;
 }
+/* ALL CART CSS BELOW THIS */
 
+.cart-page {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 60vh; 
+}
+.cart-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.item-details {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+strong {
+  font-weight: 500;
+  color: #333;
+}
+
+.cart-item div {
+  margin: 5px 0;
+  color: #666;
+}
+
+.item-actions {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.item-button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.item-button:hover {
+  background: #0056b3;
+}
+
+.remove-button {
+  background: #ff0055;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.remove-button:hover{
+  background: #c40041;
+}
+
+.total-price {
+  font-size: 18px;
+  margin: 20px 0;
+  color: #333;
+}
+
+.checkout-button,
+.add-items-button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.checkout-button:hover,
+.add-items-button:hover {
+  background: #0056b3;
+}
+
+/* ALL CART CSS ABOVE THIS */
 @media screen and (max-width: 1080px){
   .productswrapper {
     grid-template-columns: repeat(3, 1fr);
