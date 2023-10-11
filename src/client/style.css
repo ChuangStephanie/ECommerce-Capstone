@@ -90,6 +90,11 @@ nav ul li a:hover {
   color: blue;
 }
 
+.shoppingList {
+  display: flex;
+  justify-content: center;
+}
+
 .Login-form,
 .register-form,
 h2 {
@@ -195,6 +200,8 @@ nav ul button.logout-button {
 .products-title  {
   text-align: center;
 }
+
+
 
 .sort-wrapper {
   margin-bottom: 20px;

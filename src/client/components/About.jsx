@@ -8,7 +8,7 @@ const About = () => {
     <Box className="about-section">
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          <img src={Kitties} alt="Kitties" />
+          <img src={Kitties} alt="Kitties" className="leftImg"/>
         </Grid>
         <Grid item xs={4} alignItems="center">
           <Typography

@@ -65,39 +65,45 @@ const Cart = () => {
   };
 
   const confirm = () => {
-    const confirm = window.confirm("Confirm purchase?")
+    const confirm = window.confirm("Confirm purchase?");
     if (confirm) {
       handleClick();
     }
-  }
+  };
 
   return (
-    <div>
+    <div className="shoppingList">
+      <div className="listItems">
       <h2>Shopping Cart</h2>
-      <ul>
-        {cartItems.map((item) => (
-          <li key={item.id}>
-            {item.name} - ${item.price} (Quantity: {item.quantity})
-            <button
-              onClick={() => updateCartItemQuantity(item.id, item.quantity + 1)}
-            >
-              +
-            </button>
-            <button
-              onClick={() => updateCartItemQuantity(item.id, item.quantity - 1)}
-            >
-              -
-            </button>
-            <button onClick={() => removeFromCart(item.id)}>Remove</button>
-          </li>
-        ))}
-      </ul>
-      <p>Total: ${parseInt(Math.ceil(totalPrice * 100)) / 100}</p>
-      {totalPrice > 0 ? (
-        <button onClick={confirm}>Checkout</button>
-      ) : (
-        <button onClick={() => navigate("/products")}>Add Items</button>
-      )}
+        <ul>
+          {cartItems.map((item) => (
+            <li key={item.id}>
+              {item.name} - ${item.price} (Quantity: {item.quantity})
+              <button
+                onClick={() =>
+                  updateCartItemQuantity(item.id, item.quantity + 1)
+                }
+              >
+                +
+              </button>
+              <button
+                onClick={() =>
+                  updateCartItemQuantity(item.id, item.quantity - 1)
+                }
+              >
+                -
+              </button>
+              <button onClick={() => removeFromCart(item.id)}>Remove</button>
+            </li>
+          ))}
+        </ul>
+        <p>Total: ${parseInt(Math.ceil(totalPrice * 100)) / 100}</p>
+        {totalPrice > 0 ? (
+          <button onClick={confirm}>Checkout</button>
+        ) : (
+          <button onClick={() => navigate("/products")}>Add Items</button>
+        )}
+      </div>
     </div>
   );
 };
