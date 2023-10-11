@@ -32,7 +32,7 @@ function ResponsiveAppBar() {
   const settings = [
     { title: 'Home', path: '/' },
     {
-      title: userLogged ? 'Logout' : 'login',
+      title: userLogged ? 'Logout' : 'Login',
       path: userLogged ? handleUserLogout : '/login',
     },
   ]
@@ -77,7 +77,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><h1 className="hometitle">Lizards Plushies</h1></Link>
+            <h1 className="hometitle">Lizards Plushies</h1>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -110,8 +110,8 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link href={page.path} textAlign="center">
+                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                  <Link to={page.path} textAlign="center">
                     {page.title}
                   </Link>
                 </MenuItem>
@@ -122,7 +122,6 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -139,7 +138,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.title}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
@@ -147,7 +146,7 @@ function ResponsiveAppBar() {
                   to="/products"
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  Products
+                  {page.title}
                 </Link>
               </Button>
             ))}
@@ -176,8 +175,8 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  {setting.title == 'Logout' ? (
+                <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
+                                    {setting.title === 'Logout' ? (
                     <Button
                       style={{
                         textTransform: 'capitalize',
@@ -191,7 +190,7 @@ function ResponsiveAppBar() {
                     </Button>
                   ) : (
                     <Link
-                      href={`${setting.path}`}
+                      to={setting.path}
                       style={{ textDecoration: 'none', fontSize: '14px' }}
                     >
                       {setting.title}
@@ -212,4 +211,5 @@ function ResponsiveAppBar() {
     </AppBar>
   )
 }
+
 export default ResponsiveAppBar
