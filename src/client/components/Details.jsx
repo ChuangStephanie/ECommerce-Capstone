@@ -1,54 +1,55 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
-import { fetchSingleProduct } from '../API'
-import Ghost from '../assets/ghost.png'
+import React, { useState, useEffect, useContext } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { fetchSingleProduct } from "../API";
+import Ghost from "../assets/ghost.png";
+import { Box, Button, Typography } from "@mui/material";
 
 export default function Details() {
-  const { id } = useParams()
-  const [product, setProduct] = useState([])
-  const [error, setError] = useState(null)
-  const [cartItems, setCartItems] = useState([])
+  const { id } = useParams();
+  const [product, setProduct] = useState([]);
+  const [error, setError] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || []
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     const existingItemIndex = cartItems.findIndex(
       (item) => item.id === product.id
-    )
+    );
 
     if (existingItemIndex !== -1) {
-      cartItems[existingItemIndex].quantity += 1
+      cartItems[existingItemIndex].quantity += 1;
     } else {
-      cartItems.push({ ...product, quantity: 1 })
+      cartItems.push({ ...product, quantity: 1 });
     }
-    localStorage.setItem('cartItems', JSON.stringify(cartItems))
-  }
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  };
 
   useEffect(() => {
     async function getSingleProductData() {
       try {
-        const productData = await fetchSingleProduct(id)
+        const productData = await fetchSingleProduct(id);
         if (productData) {
-          setProduct(productData.product)
+          setProduct(productData.product);
         } else {
-          setError('No product fetched')
+          setError("No product fetched");
         }
       } catch (error) {
-        setError('Error fetching product data')
+        setError("Error fetching product data");
       }
     }
-    getSingleProductData()
-  }, [id])
+    getSingleProductData();
+  }, [id]);
 
   const handleAddToCart = () => {
-    console.log('Adding to cart:', product)
-    addToCart(product)
-  }
+    console.log("Adding to cart:", product);
+    addToCart(product);
+  };
 
   const handleClick = async () => {
-    const res = await fetch('http://localhost:3000/create-checkout-session', {
-      method: 'POST',
+    const res = await fetch("http://localhost:3000/create-checkout-session", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         // line_items: [
@@ -61,7 +62,7 @@ export default function Details() {
         line_items: [
           {
             price_data: {
-              currency: 'usd',
+              currency: "usd",
               product_data: {
                 name: product.name,
               },
@@ -71,26 +72,31 @@ export default function Details() {
           },
         ],
       }),
-    })
+    });
 
-    const body = await res.json()
-    window.location.href = body.url
-  }
+    const body = await res.json();
+    window.location.href = body.url;
+  };
 
   return (
-    <div className="container-1">
-      <div className="productdetail">
+    <Box className="container-1">
+      <Box className="productdetail" sx={{paddingTop: '20px'}}>
         {product && (
-          <div>
-            <img src={Ghost} alt={product.name} />
-            <h2>{product.name}</h2>
-            <h4>{product.price}</h4>
-            <p>{product.description}</p>
-            <button onClick={handleAddToCart}>Add to Cart</button>
-          </div>
+          <Box>
+            <Typography variant="h2" component='h2' sx={{fontSize:'28px', fontWeight: 'bold', marginBottom: '10px'}}>{product.name}</Typography>
+            <img className="productContent productImage"  src={Ghost} alt={product.name} />
+            <Typography variant="h4" component="h2">
+              ${product.price}
+            </Typography>
+            <Typography variant="p" component="h2">
+              {product.description}
+            </Typography>
+
+            <Button onClick={handleAddToCart}>Add to Cart</Button>
+          </Box>
         )}
-        <button onClick={handleClick}>Buy Now</button>
-      </div>
-    </div>
-  )
+        <Button onClick={handleClick}>Buy Now</Button>
+      </Box>
+    </Box>
+  );
 }
