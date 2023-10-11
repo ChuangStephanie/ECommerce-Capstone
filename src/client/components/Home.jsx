@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import Banner from "../assets/Banner.png";
 import About from "./About";
 import { Box, Container, Typography } from "@mui/material";
-import VerticalTabs from "./VerticalTabs";
+
 
 export default function Home() {
   
