@@ -46,13 +46,6 @@ const Cart = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // line_items: [
-        //   {
-        //     // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        //     price: "price_1NzWUZLy2DFROTD9qmeVEB0C",
-        //     quantity: 1,
-        //   },
-        // ],
         line_items: [
           {
             price_data: {
@@ -70,6 +63,13 @@ const Cart = () => {
     const body = await res.json();
     window.location.href = body.url;
   };
+
+  const confirm = () => {
+    const confirm = window.confirm("Confirm purchase?")
+    if (confirm) {
+      handleClick();
+    }
+  }
 
   return (
     <div>
@@ -94,7 +94,7 @@ const Cart = () => {
       </ul>
       <p>Total: ${parseInt(Math.ceil(totalPrice * 100)) / 100}</p>
       {totalPrice > 0 ? (
-        <button onClick={handleClick}>Checkout</button>
+        <button onClick={confirm}>Checkout</button>
       ) : (
         <button onClick={() => navigate("/products")}>Add Items</button>
       )}
