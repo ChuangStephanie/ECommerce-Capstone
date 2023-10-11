@@ -44,27 +44,6 @@ export default function Details() {
     addToCart(product)
   }
 
-  async function onSubmit() {
-    console.log('something')
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        line_items: [
-          {
-            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1NzWUZLy2DFROTD9qmeVEB0C',
-            quantity: 1,
-          },
-        ],
-      }),
-    }
-    const response = await fetch(
-      'http://localhost:3000/create-checkout-session',
-      requestOptions
-    )
-  }
-
   const handleClick = async () => {
     const res = await fetch('http://localhost:3000/create-checkout-session', {
       method: 'POST',
