@@ -56,7 +56,7 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link href="/">
+          <Link to="/">
             <img
               src={SmallLogo}
               alt="SmallLogo"
@@ -77,7 +77,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            <h1 className="hometitle">Lizards Plushies</h1>
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><h1 className="hometitle">Lizards Plushies</h1></Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
