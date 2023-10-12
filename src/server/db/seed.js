@@ -87,9 +87,9 @@ const products = [
 const dropTables = async () => {
   try {
     await db.query(`
-      DROP TABLE IF EXISTS users;
-      DROP TABLE IF EXISTS products;
-      DROP TABLE IF EXISTS cart_items; -- Add this line to drop the cart_items table
+      DROP TABLE IF EXISTS users CASCADE;
+      DROP TABLE IF EXISTS products CASCADE;
+      DROP TABLE IF EXISTS cart_items CASCADE; -- Add this line to drop the cart_items table
     `);
   } catch (err) {
     throw err;
@@ -104,7 +104,7 @@ const createTables = async () => {
         name VARCHAR(255) DEFAULT 'name',
         email VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
-        isAdmin VARCHAR(255) NOT NULL
+        isAdmin boolean DEFAULT false
       );
 
       CREATE TABLE products(
