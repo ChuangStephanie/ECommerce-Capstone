@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { UserContext } from '../App'
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import SmallLogo from '../assets/jamscuff_HappyOpen.png'
 import { Link } from 'react-router-dom'
 import Tilt from 'react-parallax-tilt'
@@ -205,7 +205,7 @@ function ResponsiveAppBar() {
 
             <Tooltip title="Cart">
               <IconButton component={Link} to="/cart" sx={{ p: 0 }}>
-                <AddShoppingCartIcon />
+                <ShoppingCartIcon />
               </IconButton>
             </Tooltip>
           </Box>
