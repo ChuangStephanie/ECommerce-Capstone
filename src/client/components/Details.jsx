@@ -6,6 +6,7 @@ import { Box, Button, Typography } from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ImagesSlider from "./ImagesSlider";
+import { toast } from 'react-toastify';
 
 export default function Details() {
   const { id } = useParams();
@@ -21,8 +22,10 @@ export default function Details() {
 
     if (existingItemIndex !== -1) {
       cartItems[existingItemIndex].quantity += 1;
+      toast.success(`${product.name} added to cart`);
     } else {
       cartItems.push({ ...product, quantity: 1 });
+      toast.success(`${product.name} added to cart`);
     }
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
