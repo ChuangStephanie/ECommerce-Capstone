@@ -80,7 +80,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            <h1 className="hometitle">Lizards Plushies</h1>
+            <Link style={{textDecoration: 'none'}} to="/"><h1 className="hometitle">Lizards Plushies</h1></Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
