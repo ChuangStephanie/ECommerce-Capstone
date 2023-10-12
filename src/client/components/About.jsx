@@ -6,11 +6,11 @@ import { Box, Grid, Link, Stack, Typography } from "@mui/material";
 const About = () => {
   return (
     <Box className="about-section">
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
+      <Grid container spacing={8}>
+        <Grid item xs={6}>
           <img src={Kitties} alt="Kitties" className="leftImg"/>
         </Grid>
-        <Grid item xs={4} alignItems="center">
+        <Grid item xs={6} alignItems="center">
           <Typography
             variant="h2"
             style={{
@@ -38,9 +38,6 @@ const About = () => {
           <Link href="/" style={{ textAlign: "center" }}>
             about this company
           </Link>
-        </Grid>
-        <Grid item xs={4}>
-          <img src={Miffy} alt="Miffy" elevation="24" />
         </Grid>
       </Grid>
     </Box>
