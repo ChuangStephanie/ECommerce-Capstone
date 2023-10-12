@@ -2,6 +2,8 @@ import React from "react";
 import Kitties from "../assets/kitties.png";
 import Miffy from "../assets/miffy.png";
 import { Box, Grid, Link, Stack, Typography } from "@mui/material";
+import { ParallaxProvider } from 'react-scroll-parallax'
+import { Parallax } from 'react-scroll-parallax'
 
 const About = () => {
   return (
@@ -21,6 +23,8 @@ const About = () => {
           >
             About Us
           </Typography>
+          <ParallaxProvider>
+          <Parallax translateX={['-100px', '200px']}>
           <Typography variant="body1" style={{ marginBottom: "20px" }}>
             At Lizards Plushies, we believe that everyone deserves a special
             plushie to love and cherish. That's why we handcraft our plushies
@@ -35,6 +39,8 @@ const About = () => {
             and embroidered details. We use high-quality materials to ensure
             that our plushies are durable and safe for children of all ages.
           </Typography>
+          </Parallax>
+          </ParallaxProvider>
           <Link href="/" style={{ textAlign: "center" }}>
             about this company
           </Link>
