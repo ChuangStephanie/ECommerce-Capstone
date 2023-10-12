@@ -3,6 +3,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { fetchSingleProduct } from "../API";
 import Ghost from "../assets/ghost.png";
 import { Box, Button, Typography } from "@mui/material";
+import { toast } from 'react-toastify';
 
 export default function Details() {
   const { id } = useParams();
@@ -18,8 +19,10 @@ export default function Details() {
 
     if (existingItemIndex !== -1) {
       cartItems[existingItemIndex].quantity += 1;
+      toast.success(`${product.name} added to cart`);
     } else {
       cartItems.push({ ...product, quantity: 1 });
+      toast.success(`${product.name} added to cart`);
     }
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
