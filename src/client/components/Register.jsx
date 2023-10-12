@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify'; // Import toast
+import 'react-toastify/dist/ReactToastify.css'; // Import CSS for the toast notifications
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -18,31 +20,33 @@ const Register = () => {
     setPassword(e.target.value);
   };
 
-  const register = async() => {
+  const register = async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/users/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json'
-            }, 
-            body: JSON.stringify({
-                name,
-                email,
-                password
-            })
-        });
-        const result = await response.json();
-        setMessage(result.message);
-        if(!response.ok) {
-          throw(result)
-        }
-        setName('')
+      const response = await fetch('http://localhost:3000/api/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      });
+      const result = await response.json();
+      setMessage(result.message);
+      if (response.ok) {
+        toast.success('Registration successful'); // Show success toast
+        setName('');
         setEmail('');
         setPassword('');
+      } else {
+        throw result;
+      }
     } catch (err) {
-        console.error(`${err.name}: ${err.message}`);
+      toast.error('Please provide the necessary information to register'); // Updated error message
     }
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,37 +58,39 @@ const Register = () => {
       <h2>Register New Account</h2>
       <form className="register-form" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='name'></label>
+          <label htmlFor="name">Name</label>
           <input
-            placeholder='Name'
-            id='name'
+            placeholder="Name"
+            id="name"
             value={name}
             onChange={handleNameChange}
             required
           />
         </div>
         <div>
-          <label htmlFor='email'></label>
+          <label htmlFor="email">Email</label>
           <input
-            placeholder='Email'
-            id='email'
+            placeholder="Email"
+            id="email"
             value={email}
             onChange={handleEmailChange}
             required
           />
         </div>
         <div>
-          <label htmlFor='password'></label>
+          <label htmlFor="password">Password</label>
           <input
-            placeholder='password'
-            id='password'
+            placeholder="Password"
+            id="password"
             value={password}
             onChange={handlePasswordChange}
             required
           />
         </div>
-        <button className="register-btn" type='submit'>Register</button>
-        </form>
+        <button className="register-btn" type="submit">
+          Register
+        </button>
+      </form>
       <p>{message}</p>
     </div>
   );
