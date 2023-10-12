@@ -1,95 +1,95 @@
-const db = require('./client');
-const { createUser } = require('./users');
-const { createProduct } = require('./products');
+const db = require("./client");
+const { createUser } = require("./users");
+const { createProduct } = require("./products");
 
 const users = [
   {
-    name: 'Emily Johnson',
-    email: 'emily@example.com',
-    password: 'securepass',
+    name: "Emily Johnson",
+    email: "emily@example.com",
+    password: "securepass",
     isAdmin: false,
   },
   {
-    name: 'Liu Wei',
-    email: 'liu@example.com',
-    password: 'strongpass',
+    name: "Liu Wei",
+    email: "liu@example.com",
+    password: "strongpass",
     isAdmin: false,
   },
   {
-    name: 'Isabella García',
-    email: 'bella@example.com',
-    password: 'pass1234',
+    name: "Isabella García",
+    email: "bella@example.com",
+    password: "pass1234",
     isAdmin: false,
   },
   {
-    name: 'Mohammed Ahmed',
-    email: 'mohammed@example.com',
-    password: 'mysecretpassword',
+    name: "Mohammed Ahmed",
+    email: "mohammed@example.com",
+    password: "mysecretpassword",
     isAdmin: false,
   },
   {
-    name: 'John Smith',
-    email: 'john@example.com',
-    password: 'password123',
+    name: "John Smith",
+    email: "john@example.com",
+    password: "password123",
     isAdmin: false,
   },
   {
-    name: 'Jamie Chuang',
-    email: 'MxJChuang@money.com',
-    password: 'morbidcuriosity',
+    name: "Jamie Chuang",
+    email: "MxJChuang@money.com",
+    password: "morbidcuriosity",
     isAdmin: true,
   },
 ];
 
 const products = [
   {
-    name: 'Product 1',
+    name: "Ghost Kitty Keychain",
     price: 19.99,
-    description: 'Description for Product 1',
-    category: 'Plushy',
+    description: "Description for Product 1",
+    category: "Keychain",
     onSale: false,
-    image: 'https://i.imgur.com/FHfjUae.png',
+    image: ["https://i.imgur.com/FHfjUae.png", "https://imgur.com/a/wnR4ode", "https://imgur.com/a/VNOHSiG"],
   },
   {
-    name: 'Product 2',
+    name: "Paw Keychain",
     price: 29.99,
-    description: 'Description for Product 2',
-    category: 'Keychain',
+    description: "Description for Product 2",
+    category: "Keychain",
     onSale: false,
-    image: 'https://imgur.com/7DHbZaP.png',
+    image: ["https://imgur.com/7DHbZaP.png", "https://i.imgur.com/yfyHK0r.png"],
   },
   {
-    name: 'Product 3',
+    name: "Kitty Keychain",
     price: 9.99,
-    description: 'Description for Product 3',
-    category: 'Plushy',
+    description: "Description for Product 3",
+    category: "Keychain",
     onSale: true,
-    image: 'https://imgur.com/yfyHK0r.png',
+    image: ["https://imgur.com/A1621HQ", "https://imgur.com/3CMpM8r", "https://imgur.com/wP1RmYr"],
   },
   {
-    name: 'Product 4',
+    name: "Miffy Patch",
     price: 39.99,
-    description: 'Description for Product 4',
-    category: 'Keychain',
+    description: "Description for Product 4",
+    category: "Plushy",
     onSale: false,
-    image: 'https://imgur.com/kwIAy5y.png',
+    image: ["https://imgur.com/kwIAy5y.png", "https://imgur.com/aKYnGYy"],
   },
   {
-    name: 'Product 5',
+    name: "Bob Patch",
     price: 49.99,
-    description: 'Description for Product 5',
-    category: 'Plushy',
+    description: "Description for Product 5",
+    category: "Plushy",
     onSale: true,
-    image: 'https://imgur.com/b5go1jN.png',
+    image: ["https://imgur.com/b5go1jN.png", "https://imgur.com/AcPUgzN"],
   },
 ];
 
 const dropTables = async () => {
   try {
     await db.query(`
-      DROP TABLE IF EXISTS users;
-      DROP TABLE IF EXISTS products;
-      DROP TABLE IF EXISTS cart_items; -- Add this line to drop the cart_items table
+      DROP TABLE IF EXISTS users CASCADE;
+      DROP TABLE IF EXISTS products CASCADE;
+      DROP TABLE IF EXISTS cart_items CASCADE; -- Add this line to drop the cart_items table
     `);
   } catch (err) {
     throw err;
@@ -139,9 +139,9 @@ const insertUsers = async () => {
         isAdmin: user.isAdmin,
       });
     }
-    console.log('User seed data inserted successfully.');
+    console.log("User seed data inserted successfully.");
   } catch (error) {
-    console.error('Error inserting user seed data:', error);
+    console.error("Error inserting user seed data:", error);
   }
 };
 
@@ -157,9 +157,9 @@ const insertProducts = async () => {
         image: product.image,
       });
     }
-    console.log('Product seed data inserted successfully.');
+    console.log("Product seed data inserted successfully.");
   } catch (error) {
-    console.error('Error inserting product seed data:', error);
+    console.error("Error inserting product seed data:", error);
   }
 };
 
