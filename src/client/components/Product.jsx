@@ -14,6 +14,7 @@ import {
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 import { styled } from "@mui/system";
+import { toast } from 'react-toastify'; // Import toast from react-toastify
 
 const useStyles = styled("div")({
   root: {
@@ -35,7 +36,7 @@ const useStyles = styled("div")({
 
 const Product = ({ product }) => {
   const classes = useStyles;
-  const [cartItems, setCartItems] = useState([]);
+
   const addToCart = (product) => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     const existingItemIndex = cartItems.findIndex(
@@ -44,11 +45,20 @@ const Product = ({ product }) => {
 
     if (existingItemIndex !== -1) {
       cartItems[existingItemIndex].quantity += 1;
+      // Notify the user that the item has been added to the cart
+      toast.success(`${product.name} added to cart`, {
+        position: "top-right", 
+      });
     } else {
       cartItems.push({ ...product, quantity: 1 });
+      // Notify the user that the item has been added to the cart
+      toast.success(`${product.name} added to cart`, {
+        position: "top-right", 
+      });
     }
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
+
   return (
     <Card key={product.id} className={`${classes.root} productContent`}>
       <Link to={`/products/${product.id}`}>

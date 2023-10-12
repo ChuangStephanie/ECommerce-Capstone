@@ -1,14 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../App';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'; // Import toast
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { userLogged, setUserLogged } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [passwordError, setPasswordError] = useState(''); // New state for password error
+  const [passwordError, setPasswordError] = useState('');
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -16,16 +18,19 @@ const Login = () => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    // Clear the password error message when the user starts typing a new password
-    setPasswordError('');
+    setPasswordError(''); // Clear the password error message when the user starts typing a new password
   };
 
   const login = async () => {
     try {
-      // Check password length before sending the request
       if (password.length < 6) {
         setPasswordError('Password is too short (minimum 6 characters)');
-        return; // Don't proceed with the login if the password is too short
+        toast.error('Password is too short (minimum 6 characters)', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+        });
+        return;
       }
 
       const response = await fetch('http://localhost:3000/api/users/login', {
@@ -47,9 +52,19 @@ const Login = () => {
       setEmail('');
       setPassword('');
       setUserLogged(true);
-      navigate ("/")
+      navigate('/');
+      toast.success('Login successful!', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+      });
     } catch (err) {
       console.error(`${err.name}: ${err.message}`);
+      toast.error('Login failed. Please check your credentials.', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+      });
     }
   };
 

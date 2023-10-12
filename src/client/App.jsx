@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';  // Import ToastContainer
+import 'react-toastify/dist/ReactToastify.css';   // Import CSS for the toast notifications
 import Login from "./components/Login";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import Home from "./components/Home";
@@ -50,31 +52,35 @@ function App() {
 
 
   return (
-    <UserContext.Provider value={{ userLogged, setUserLogged, products, setProducts, error, setError, searchParams, setSearchParams, isLoading, setIsLoading, getAllProducts, productsToDisplay }}>
+    <>
+      <UserContext.Provider value={{ userLogged, setUserLogged, products, setProducts, error, setError, searchParams, setSearchParams, isLoading, setIsLoading, getAllProducts, productsToDisplay }}>
       <ResponsiveAppBar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+      <Route path="/" element={<Home />} />
 
-        <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login />} />
 
-        <Route path="/register" element={<Register />} />
-          
-        <Route path="/products/:id" element={<Details />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
+      <Route path="/register" element={<Register />} />
+        
+      <Route path="/products/:id" element={<Details />} />
+      {/* <Route path="/profile" element={<Profile />} /> */}
 
-        <Route path="/products" element={<Products />} />
+      <Route path="/products" element={<Products />} />
 
-        <Route path="/category/keychains" element={<Keychains />} />
+      <Route path="/category/keychains" element={<Keychains />} />
 
-        <Route path="/category/on-sale-items" element={<OnSale />} />
+      <Route path="/category/on-sale-items" element={<OnSale />} />
 
-        <Route path="/category/plushies" element={<Plushies />} />
+      <Route path="/category/plushies" element={<Plushies />} />
 
-        <Route path="/cart" element={<Cart />} />
+      <Route path="/cart" element={<Cart />} />
 
       </Routes>
     </UserContext.Provider>
+    <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+  </>
+    
   );
 }
 
