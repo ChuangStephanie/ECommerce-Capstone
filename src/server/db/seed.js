@@ -56,7 +56,7 @@ const products = [
     description: 'Description for Product 2',
     category: 'Keychain',
     onSale: false,
-    image: 'https://i.imgur.com/FHfjUae.png',
+    image: 'https://imgur.com/7DHbZaP.png',
   },
   {
     name: 'Product 3',
@@ -64,7 +64,7 @@ const products = [
     description: 'Description for Product 3',
     category: 'Plushy',
     onSale: true,
-    image: 'https://i.imgur.com/FHfjUae.png',
+    image: 'https://imgur.com/yfyHK0r.png',
   },
   {
     name: 'Product 4',
@@ -72,7 +72,7 @@ const products = [
     description: 'Description for Product 4',
     category: 'Keychain',
     onSale: false,
-    image: 'https://i.imgur.com/FHfjUae.png',
+    image: 'https://imgur.com/kwIAy5y.png',
   },
   {
     name: 'Product 5',
@@ -80,7 +80,7 @@ const products = [
     description: 'Description for Product 5',
     category: 'Plushy',
     onSale: true,
-    image: 'https://i.imgur.com/FHfjUae.png',
+    image: 'https://imgur.com/b5go1jN.png',
   },
 ];
 

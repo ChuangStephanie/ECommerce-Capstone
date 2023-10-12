@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { fetchSingleProduct } from "../API";
 import Ghost from "../assets/ghost.png";
 import { Box, Button, Typography } from "@mui/material";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import ImagesSlider from "./ImagesSlider";
 
 export default function Details() {
   const { id } = useParams();
@@ -80,11 +83,22 @@ export default function Details() {
 
   return (
     <Box className="container-1">
-      <Box className="productdetail" sx={{paddingTop: '20px'}}>
+      <Box className="productdetail" sx={{ paddingTop: "20px" }}>
         {product && (
           <Box>
-            <Typography variant="h2" component='h2' sx={{fontSize:'28px', fontWeight: 'bold', marginBottom: '10px'}}>{product.name}</Typography>
-            <img className="productContent productImage"  src={Ghost} alt={product.name} />
+            <Typography
+              variant="h2"
+              component="h2"
+              sx={{
+                fontSize: "28px",
+                fontWeight: "bold",
+                marginBottom: "10px",
+              }}
+            >
+              {product.name}
+            </Typography>
+            <ImagesSlider product={product}/>
+            
             <Typography variant="h4" component="h2">
               ${product.price}
             </Typography>
