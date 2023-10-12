@@ -15,7 +15,7 @@ export default function Home() {
       <img src={Banner} alt="Banner" />
     </Box>
     <Container maxWidth="md">
-      <Typography variant="h1" style={{fontSize: '26px', fontWeight: '500'}}>
+      <Typography variant="h1" style={{fontSize: '26px', fontWeight: '700'}}>
         <br />
         Welcome to Lizards Plushies, Your one stop shop for everything Plushie.
       </Typography>
