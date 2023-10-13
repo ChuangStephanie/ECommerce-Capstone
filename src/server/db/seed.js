@@ -44,43 +44,48 @@ const users = [
 const products = [
   {
     name: "Ghost Kitty Keychain",
-    price: 19.99,
+    price: 12.99,
     description: "Description for Product 1",
     category: "Keychain",
     onSale: false,
-    image: ["https://i.imgur.com/FHfjUae.png", "https://imgur.com/a/wnR4ode", "https://imgur.com/a/VNOHSiG"],
+    image: "https://i.imgur.com/FHfjUae.png",
+    carousel: ["https://i.imgur.com/FHfjUae.png","https://imgur.com/a/wnR4ode", "https://imgur.com/a/VNOHSiG"],
   },
   {
     name: "Paw Keychain",
-    price: 29.99,
+    price: 12.99,
     description: "Description for Product 2",
     category: "Keychain",
     onSale: false,
-    image: ["https://imgur.com/7DHbZaP.png", "https://i.imgur.com/yfyHK0r.png"],
+    image: "https://imgur.com/7DHbZaP.png",
+    carousel: ["https://imgur.com/7DHbZaP.png", "https://i.imgur.com/yfyHK0r.png"],
   },
   {
     name: "Kitty Keychain",
-    price: 9.99,
+    price: 14.99,
     description: "Description for Product 3",
     category: "Keychain",
     onSale: true,
-    image: ["https://imgur.com/A1621HQ", "https://imgur.com/3CMpM8r", "https://imgur.com/wP1RmYr"],
+    image: "https://imgur.com/A1621HQ",
+    carousel: ["https://imgur.com/A1621HQ", "https://imgur.com/3CMpM8r", "https://imgur.com/wP1RmYr"],
   },
   {
     name: "Miffy Patch",
-    price: 39.99,
+    price: 5.99,
     description: "Description for Product 4",
     category: "Plushy",
     onSale: false,
-    image: ["https://imgur.com/kwIAy5y.png", "https://imgur.com/aKYnGYy"],
+    image: "https://imgur.com/kwIAy5y.png",
+    carousel: ["https://imgur.com/kwIAy5y.png", "https://imgur.com/aKYnGYy"],
   },
   {
     name: "Bob Patch",
-    price: 49.99,
+    price: 9.99,
     description: "Description for Product 5",
     category: "Plushy",
     onSale: true,
-    image: ["https://imgur.com/b5go1jN.png", "https://imgur.com/AcPUgzN"],
+    image: "https://imgur.com/b5go1jN.png",
+    carousel: ["https://imgur.com/b5go1jN.png", "https://imgur.com/AcPUgzN"],
   },
 ];
 
@@ -114,7 +119,8 @@ const createTables = async () => {
         description TEXT,
         category TEXT,
         onSale VARCHAR(255) NOT NULL,
-        image TEXT
+        image TEXT,
+        carousel TEXT
       );
 
       CREATE TABLE cart_items(
@@ -155,6 +161,7 @@ const insertProducts = async () => {
         category: product.category,
         onSale: product.onSale,
         image: product.image,
+        carousel: product.carousel,
       });
     }
     console.log("Product seed data inserted successfully.");
