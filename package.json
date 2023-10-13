@@ -5,7 +5,7 @@
   "proxy": "http://localhost:3000",
   "scripts": {
     "dev": "nodemon src/server/main.js -w src/server",
-    "start": "node src/server/main.js",
+    "start": "NODE_ENV=production node src/server/main.js",
     "seed": "node ./src/server/db/seed.js",
     "build": "vite build"
   },
