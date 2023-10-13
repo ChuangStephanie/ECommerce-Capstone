@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify'; // Import toast
-import 'react-toastify/dist/ReactToastify.css'; // Import CSS for the toast notifications
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -36,7 +36,7 @@ const Register = () => {
       const result = await response.json();
       setMessage(result.message);
       if (response.ok) {
-        toast.success('Registration successful'); // Show success toast
+        toast.success('Registration successful');
         setName('');
         setEmail('');
         setPassword('');
@@ -44,7 +44,7 @@ const Register = () => {
         throw result;
       }
     } catch (err) {
-      toast.error('Please provide the necessary information to register'); // Updated error message
+      toast.error('Please provide the necessary information to register');
     }
   };
 
@@ -54,44 +54,48 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h2>Register New Account</h2>
+    <div className="register-container">
+      <h2 style={{ marginBottom:'15px', fontSize: '28px' }}>Register New Account</h2>
       <form className="register-form" onSubmit={handleSubmit}>
-        <div>
+        <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
-            placeholder="Name"
+            type="text"
+            placeholder="Enter your name"
             id="name"
             value={name}
             onChange={handleNameChange}
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
-            placeholder="Email"
+            type="email"
+            placeholder="Enter your email"
             id="email"
             value={email}
             onChange={handleEmailChange}
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
-            placeholder="Password"
+            type="password"
+            placeholder="Enter your password"
             id="password"
             value={password}
             onChange={handlePasswordChange}
             required
+            
           />
         </div>
         <button className="register-btn" type="submit">
           Register
         </button>
       </form>
-      <p>{message}</p>
+      <p className="message">{message}</p>
     </div>
   );
 };

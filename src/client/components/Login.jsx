@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../App';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify'; // Import toast
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Login = () => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    setPasswordError(''); // Clear the password error message when the user starts typing a new password
+    setPasswordError('');
   };
 
   const login = async () => {
@@ -74,23 +74,24 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form className="Login-form" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email"></label>
+    <div className="login-container">
+      <h2 style={{marginBottom:'20px', fontSize: '28px'}}>Login</h2>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
           <input
-            placeholder="Email"
+            placeholder="Enter your email"
             id="email"
             value={email}
             onChange={handleEmailChange}
             required
+            type="email"
           />
         </div>
-        <div>
-          <label htmlFor="password"></label>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
-            placeholder="Password"
+            placeholder="Enter your password"
             id="password"
             value={password}
             onChange={handlePasswordChange}
