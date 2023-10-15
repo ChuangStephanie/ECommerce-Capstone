@@ -40,7 +40,7 @@ const Cart = () => {
   const totalPriceTitle = 'Total Price'
 
   const handleClick = async () => {
-    const res = await fetch('https://lizardsplushies.netlify.app/create-checkout-session', {
+    const res = await fetch('https://lizardsplushies.onrender.com/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

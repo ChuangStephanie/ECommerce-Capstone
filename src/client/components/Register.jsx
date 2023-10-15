@@ -22,7 +22,7 @@ const Register = () => {
 
   const register = async () => {
     try {
-      const response = await fetch('https://lizardsplushies.netlify.app/api/users/register', {
+      const response = await fetch('https://lizardsplushies.onrender.com/api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

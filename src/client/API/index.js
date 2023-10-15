@@ -1,4 +1,4 @@
-const baseURL = "https://lizardsplushies.netlify.app";
+const baseURL = "https://lizardsplushies.onrender.com";
 
 export async function fetchAllProducts() {
     try {
