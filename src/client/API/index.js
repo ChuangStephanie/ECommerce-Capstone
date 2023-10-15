@@ -2,7 +2,12 @@ const baseURL = "https://lizardsplushies.onrender.com";
 
 export async function fetchAllProducts() {
     try {
-        const response =  await fetch(`${baseURL}/api/products`);
+        const response =  await fetch(`${baseURL}/api/products`, {
+            method: "GET",
+            withCredentials: true,
+            crossorigin: true,
+            mode: "no-cors",
+        });
         const result =  await response.json();
         return result.products;
     } catch (error) {
