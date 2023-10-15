@@ -9,8 +9,7 @@
     "seed:dev": "nodemon ./db/seed.js",
     "seed": "node ./db/seed.js",
     "start": "node main.js",
-    "start:dev": "nodemon main.js",
-    "build": "npm i"
+    "start:dev": "nodemon main.js"
     
   },
 
