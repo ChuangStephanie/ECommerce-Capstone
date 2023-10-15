@@ -1,12 +1,12 @@
-const { Client } = require("pg");
+const { Client } = require('pg');
 
-const connectionString =
-  process.env.DATABASE_URL ||
-  "postgres://lizards_plushies_user:FVO8HMBA5YNcDPSmsKam1h2VfdDr1HPL@dpg-ck3kkm7qj8ts73faggug-a.ohio-postgres.render.com/lizards_plushies?ssl=true"; /*'https://localhost:5432/lizardsplushies'*/
+const connectionString = process.env.DATABASE_URL || 'postgres://lizard_db_user:u4DKldHONhWkbQgJq5h5dOWeI1z5qM7r@dpg-cklvhfrj89us7391829g-a.ohio-postgres.render.com/lizard_db?ssl=true';
 
 const db = new Client({
-  connectionString,
-  // ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
+    connectionString,
+    // ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
 });
+
+
 
 module.exports = db;
