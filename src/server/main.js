@@ -40,10 +40,9 @@ app.post("/create-checkout-session", async (req, res) => {
 });
 
 const allowCrossDomain = function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://lizardsplushies.netlify.app/");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers");
-
+  res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 };
 
