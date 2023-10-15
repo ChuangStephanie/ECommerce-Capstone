@@ -1,4 +1,4 @@
-const baseURL = "https://localhost:3000/products";
+const baseURL = "http://localhost:3000";
 
 export async function fetchAllProducts() {
     try {
