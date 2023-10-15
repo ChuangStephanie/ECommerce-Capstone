@@ -24,7 +24,7 @@ const About = () => {
             About Us
           </Typography>
           <ParallaxProvider>
-          <Parallax translateX={['-100px', '200px']}>
+          <Parallax translateX={['-100px', '300px']}>
           <Typography variant="body1" style={{ marginBottom: "20px" }}>
             At Lizards Plushies, we believe that everyone deserves a special
             plushie to love and cherish. That's why we handcraft our plushies
@@ -47,6 +47,7 @@ const About = () => {
         </Grid>
       </Grid>
     </Box>
+    
   );
 };
 
