@@ -7,15 +7,17 @@ const express = require("express");
 const router = require("vite-express");
 const app = express();
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
-
 const allowCrossDomain = function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.header("Access-Control-Allow-Headers", "*");
   next();
 };
+
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+
+
 
 app.use(allowCrossDomain);
 
