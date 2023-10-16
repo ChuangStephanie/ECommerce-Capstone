@@ -10,6 +10,15 @@ const app = express();
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
+const allowCrossDomain = function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+};
+
+app.use(allowCrossDomain);
+
 app.use(express.static("public"));
 
 const db = require("./db/client");
@@ -39,14 +48,6 @@ app.post("/create-checkout-session", async (req, res) => {
   res.json({ url: session.url });
 });
 
-const allowCrossDomain = function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  res.header("Access-Control-Allow-Headers", "*");
-  next();
-};
-
-app.use(allowCrossDomain);
 
 router.listen(app, 3000, () =>
   console.log("Server is listening on port 3000...")
