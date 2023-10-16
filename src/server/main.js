@@ -14,12 +14,14 @@ const allowCrossDomain = function (req, res, next) {
   next();
 };
 
+app.use(allowCrossDomain);
+
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
 
 
-app.use(allowCrossDomain);
+
 
 app.use(express.static("public"));
 
