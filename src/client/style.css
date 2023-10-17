@@ -225,13 +225,14 @@ nav ul button.logout-button {
 .footer {
   background-color: #007bff; /* Match the color with your navbar */
   color: white; /* Text color is white */
-  padding: 1px 0; /* Adjust the padding for top and bottom */
+  padding: 10px 0; /* Adjust the padding for top and bottom */
   text-align: center;
   position: fixed; /* Make it fixed at the bottom */
   bottom: 0;
   left: 0;
   width: 100%;
   font-family: 'Montserrat', sans-serif; /* Match the font with your navbar */
+  z-index: 999; /* Ensure it appears above other content */
 }
 
 .footer-content {
@@ -249,6 +250,7 @@ nav ul button.logout-button {
 .footer-content a:hover {
   text-decoration: underline;
 }
+
 
 @media screen and (max-width: 820px) {
   .productswrapper {

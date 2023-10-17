@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
@@ -7,8 +7,11 @@ import { Facebook, Instagram, Twitter } from "@mui/icons-material";
 import { Box } from "@mui/material";
 
 export default function Footer() {
+  const [showFooter, setShowFooter] = useState(false);
+
+
   return (
-    <footer className="footer">
+    <footer className={showFooter ? "footer" : "footer hidden"}>
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           <Grid item xs={12} sm={4}>
