@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import ResponsiveAppBar from './components/ResponsiveAppBar';
-import Footer from './components/Footer'; // Import the Footer component
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Login from './components/Login';
-import Home from './components/Home';
-import Register from './components/Register';
-import Details from './components/Details';
-import Cart from './components/Cart';
-import { createContext } from 'react';
-import Products from './components/Products/';
-import Keychains from './components/Keychains';
-import OnSale from './components/OnSale';
-import Plushies from './components/Plushies';
-import { fetchAllProducts } from './API';
+import React, { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import ResponsiveAppBar from "./components/ResponsiveAppBar";
+import Footer from "./components/Footer"; // Import the Footer component
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import Register from "./components/Register";
+import Details from "./components/Details";
+import Cart from "./components/Cart";
+import { createContext } from "react";
+import Products from "./components/Products/";
+import Keychains from "./components/Keychains";
+import OnSale from "./components/OnSale";
+import Plushies from "./components/Plushies";
+import { fetchAllProducts } from "./API";
 
 export const UserContext = createContext();
 
@@ -22,7 +22,7 @@ function App() {
   const [userLogged, setUserLogged] = useState(false);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-  const [searchParams, setSearchParams] = useState('');
+  const [searchParams, setSearchParams] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   async function getAllProducts() {
@@ -32,11 +32,11 @@ function App() {
         setProducts(response);
         setIsLoading(false);
       } else {
-        setError('No products found');
+        setError("No products found");
         setIsLoading(false);
       }
     } catch (error) {
-      setError('Error loading products');
+      setError("Error loading products");
       setIsLoading(false);
     }
   }
@@ -69,20 +69,30 @@ function App() {
           productsToDisplay,
         }}
       >
-        <ResponsiveAppBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/products/:id" element={<Details />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/category/keychains" element={<Keychains />} />
-          <Route path="/category/on-sale-items" element={<OnSale />} />
-          <Route path="/category/plushies" element={<Plushies />} />
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-        <Footer />
-        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+        <div id="page-container">
+          <div id="content-wrap">
+            <ResponsiveAppBar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/products/:id" element={<Details />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/category/keychains" element={<Keychains />} />
+              <Route path="/category/on-sale-items" element={<OnSale />} />
+              <Route path="/category/plushies" element={<Plushies />} />
+              <Route path="/cart" element={<Cart />} />
+            </Routes>
+          </div>
+          <div id="page-bottom">
+            <Footer />
+          </div>
+        </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+        />
       </UserContext.Provider>
     </>
   );

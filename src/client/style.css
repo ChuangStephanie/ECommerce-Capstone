@@ -221,14 +221,32 @@ nav ul button.logout-button {
   margin: 0 5px;
 }
 
+#page-container {
+  position: relative;
+  min-height: auto;
+}
+
+#content-wrap{
+  padding-bottom: 2.5rem;
+}
+
+#page-bottom{
+  position:static;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 7rem;
+}
+
 /* footer.css */
 .footer {
   background-color: #007bff; /* Match the color with your navbar */
   color: white; /* Text color is white */
   padding: 1px 0; /* Adjust the padding for top and bottom */
   text-align: center;
-  position: fixed; /* Make it fixed at the bottom */
+  position: absolute; /* Make it fixed at the bottom */
   bottom: 0;
+  right: 0;
   left: 0;
   width: 100%;
   font-family: 'Montserrat', sans-serif; /* Match the font with your navbar */
