@@ -9,6 +9,7 @@ import Home from './components/Home';
 import Register from './components/Register';
 import Details from './components/Details';
 import Cart from './components/Cart';
+import Admin from './components/Admin';
 import { createContext } from 'react';
 import Products from './components/Products/';
 import Keychains from './components/Keychains';
@@ -74,6 +75,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/products/:id" element={<Details />} />
           <Route path="/products" element={<Products />} />
           <Route path="/category/keychains" element={<Keychains />} />
