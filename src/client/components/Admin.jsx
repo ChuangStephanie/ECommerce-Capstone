@@ -4,6 +4,8 @@ import { fetchAllUsers } from "../API";
 export default function Admin() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
+  const isAdmin = sessionStorage.getItem("email");
+  console.log("Admin?", isAdmin);
 
   useEffect(() => {
     async function getAllUsers() {
@@ -28,7 +30,16 @@ export default function Admin() {
     <>
       <h2>Users</h2>
       <div className="userinfo">
-        {users.map((user) => {
+        {isAdmin ? users.map((user) => {
+          return (
+            <div className="user">
+              <h4>{user.name}</h4>
+              <p>{user.id}</p>
+              <p>{user.email}</p>
+            </div>
+          )
+        }) : <p>User is not authorized to view this page</p>}
+        {/* {users.map((user) => {
             return (
                 <div className="user">
                     <h4>{user.name}</h4>
@@ -36,7 +47,7 @@ export default function Admin() {
                     <p>{user.email}</p>
                 </div>
             )
-        })}
+        })} */}
       </div>
     </>
   );
