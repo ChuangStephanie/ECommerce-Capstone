@@ -77,11 +77,11 @@ const Login = () => {
     }
   }
 
-  isAdmin();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     login();
+    isAdmin();
   };
 
   return (
