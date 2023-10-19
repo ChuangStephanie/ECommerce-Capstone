@@ -1,4 +1,4 @@
-const baseURL = "https://lizardsplushies.onrender.com";
+const baseURL = "http://localhost:3000";
 
 export async function fetchAllProducts() {
     try {
@@ -25,8 +25,8 @@ export async function fetchAllUsers() {
     try {
         const response = await fetch(`${baseURL}/api/users`);
         const result = response.json();
-        console.log("List of users", result.users)
-        return result.users;
+        console.log("List of users", result)
+        return result;
     } catch (error) {
         console.error(error, "No users were fetched");
     }

@@ -42,7 +42,7 @@ const Cart = () => {
 
   const handleClick = async () => {
     try {
-      const res = await fetch('https://lizardsplushies.onrender.com/create-checkout-session', {
+      const res = await fetch('http://localhost:3000/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

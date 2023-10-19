@@ -13,7 +13,7 @@ export default function Admin() {
         const response = await fetchAllUsers();
         if (response) {
           console.log("response", response);
-          setUsers(response);
+          setUsers(response.users);
         } else {
           setError(console.error("No users found"));
         }
