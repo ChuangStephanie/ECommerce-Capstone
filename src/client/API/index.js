@@ -26,7 +26,7 @@ export async function fetchAllUsers() {
         const response = await fetch(`${baseURL}/api/users`);
         const result = response.json();
         console.log("List of users", result.users)
-        return result.users;
+        return result;
     } catch (error) {
         console.error(error, "No users were fetched");
     }
