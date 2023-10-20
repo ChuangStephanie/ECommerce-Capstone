@@ -9,9 +9,30 @@ import { Box } from "@mui/material";
 export default function Footer() {
   const [showFooter, setShowFooter] = useState(false);
 
+  useEffect(() => {
+    // Function to check if the user has scrolled to the bottom
+    function handleScroll() {
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight
+      ) {
+        setShowFooter(true);
+      } else {
+        setShowFooter(false);
+      }
+    }
+
+    // Add the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
 
   return (
-    <footer className={showFooter ? "footer" : "footer hidden"}>
+    <footer className={showFooter ? "footer visible" : "footer"}>
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           <Grid item xs={12} sm={4}>
