@@ -20,3 +20,14 @@ export async function fetchSingleProduct(productId) {
         console.error("No product was fetched", error);
     }
 }
+
+export async function fetchAllUsers() {
+    try {
+        const response = await fetch(`${baseURL}/api/users`);
+        const result = response.json();
+        console.log("List of users", result.users)
+        return result;
+    } catch (error) {
+        console.error(error, "No users were fetched");
+    }
+}
