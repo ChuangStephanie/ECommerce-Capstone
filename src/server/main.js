@@ -37,7 +37,7 @@ db.connect()
 const apiRouter = require("./api");
 app.use("/api", apiRouter);
 
-const YOUR_DOMAIN = "http://localhost:3000";
+const YOUR_DOMAIN = "https://lizardsplushies.onrender.com";
 
 app.post("/create-checkout-session", async (req, res) => {
   const { line_items } = req.body;
