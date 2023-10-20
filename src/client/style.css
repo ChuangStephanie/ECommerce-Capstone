@@ -123,6 +123,19 @@ nav ul button.logout-button {
   color: white;
 }
 
+.users{
+  text-align: center;
+}
+
+.productlist{
+  display: flex;
+  justify-content:space-around;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  text-align: center;
+}
+
 .register-link {
   display: flex;
   justify-content: center;
@@ -347,6 +360,7 @@ nav .searchbar .productscontainer {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
+  margin-bottom: 150px;
 }
 
 h2 {

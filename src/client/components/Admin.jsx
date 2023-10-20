@@ -22,14 +22,14 @@ export default function Admin() {
         setError(console.error("Error fetching users"));
       }
     }
-    async function getAllProducts(){
+    async function getAllProducts() {
       try {
         const productData = await fetchAllProducts();
         if (productData) {
           console.log("products", productData);
           setProducts(productData);
         } else {
-          setError(console.error("No products found"))
+          setError(console.error("No products found"));
         }
       } catch (error) {
         setError(console.error("Error fetching products"));
@@ -42,7 +42,7 @@ export default function Admin() {
   console.log("users", users);
 
   function displayAll() {
-    if (isAdmin) { 
+    if (isAdmin) {
       users.map((user) => {
         return (
           <div className="user">
@@ -50,8 +50,8 @@ export default function Admin() {
             <p>{user.id}</p>
             <p>{user.email}</p>
           </div>
-        )
-      })
+        );
+      });
       products.map((product) => {
         return (
           <>
@@ -60,8 +60,8 @@ export default function Admin() {
               <img src={product.image} />
             </div>
           </>
-        )
-      })
+        );
+      });
     } else {
       return;
     }
@@ -69,29 +69,43 @@ export default function Admin() {
 
   return (
     <>
-      <h1 className="users">Users</h1>
-      <div className="userinfo">
-        {isAdmin ? users.map((user) => {
-          return (
-            <div className="user">
-              <h4>{user.name}</h4>
-              <p>{user.id}</p>
-              <p>{user.email}</p>
-            </div>
-          )
-        }) : <p>User is not authorized to view this page</p>}
+      <div className="users">
+        <h1>Users</h1>
+        <div className="userinfo">
+          {isAdmin ? (
+            users.map((user) => {
+              return (
+                <div className="user">
+                  <h4>{user.name}</h4>
+                  <p>{user.id}</p>
+                  <p>{user.email}</p>
+                </div>
+              );
+            })
+          ) : (
+            <p>User is not authorized to view this page</p>
+          )}
+        </div>
       </div>
       <div className="productlist">
-        {isAdmin ? products.map((product) => {
-        return (
-          <>
-            <div className="products2">
-              <h3>{product.name}</h3>
-              <img className="productimg" src={product.image} style={{width:100}} />
-            </div>
-          </>
-        )
-      }) : <p></p>}
+        {isAdmin ? (
+          products.map((product) => {
+            return (
+              <>
+                <div className="products2">
+                  <h3>{product.name}</h3>
+                  <img
+                    className="productimg"
+                    src={product.image}
+                    style={{ width: 100 }}
+                  />
+                </div>
+              </>
+            );
+          })
+        ) : (
+          <p></p>
+        )}
       </div>
     </>
   );
