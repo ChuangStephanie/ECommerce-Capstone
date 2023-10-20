@@ -1,4 +1,4 @@
-const baseURL = "https://lizardsplushies.onrender.com";
+export const baseURL = "https://lizardsplushies.onrender.com";
 
 export async function fetchAllProducts() {
   try {
@@ -34,7 +34,7 @@ export async function fetchAllUsers() {
 
 export async function deleteProduct(productId) {
   try {
-    const response = await fetch(`${BASE_URL}/products/${productId}`, {
+    const response = await fetch(`${baseURL}/products/${product.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export async function deleteProduct(productId) {
 
 export async function makeProduct(productData) {
     try {
-      const response = await fetch(`${BASE_URL}/products`, {
+      const response = await fetch(`${baseURL}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export async function makeProduct(productData) {
 
   export async function editProduct(productData) {
     try {
-      const response = await fetch(`${BASE_URL}/products`, {
+      const response = await fetch(`${baseURL}/products`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
