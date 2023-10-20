@@ -41,6 +41,32 @@ export default function Admin() {
 
   console.log("users", users);
 
+  function displayAll() {
+    if (isAdmin) { 
+      users.map((user) => {
+        return (
+          <div className="user">
+            <h4>{user.name}</h4>
+            <p>{user.id}</p>
+            <p>{user.email}</p>
+          </div>
+        )
+      })
+      products.map((product) => {
+        return (
+          <>
+            <div className="products2">
+              <h3>{product.name}</h3>
+              <img src={product.image} />
+            </div>
+          </>
+        )
+      })
+    } else {
+      return;
+    }
+  }
+
   return (
     <>
       <h1 className="users">Users</h1>
@@ -54,6 +80,18 @@ export default function Admin() {
             </div>
           )
         }) : <p>User is not authorized to view this page</p>}
+      </div>
+      <div className="productlist">
+        {isAdmin ? products.map((product) => {
+        return (
+          <>
+            <div className="products2">
+              <h3>{product.name}</h3>
+              <img className="productimg" src={product.image} style={{width:100}} />
+            </div>
+          </>
+        )
+      }) : <p></p>}
       </div>
     </>
   );
