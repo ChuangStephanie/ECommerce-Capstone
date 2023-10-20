@@ -227,22 +227,18 @@ nav ul button.logout-button {
   margin: 0 5px;
 }
 
+/* footer.css */
 .footer {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 0;
+  background-color: #007bff; /* Match the color with your navbar */
+  color: white; /* Text color is white */
+  padding: 10px 0; /* Adjust the padding for top and bottom */
   text-align: center;
-  position: fixed;
+  position: fixed; /* Make it fixed at the bottom */
   bottom: 0;
   left: 0;
   width: 100%;
-  font-family: 'Montserrat', sans-serif;
-  z-index: 999;
-  display: none; /* Initially hide the footer */
-}
-
-.footer.visible {
-  display: block; /* Show the footer when the "visible" class is added */
+  font-family: 'Montserrat', sans-serif; /* Match the font with your navbar */
+  z-index: 999; /* Ensure it appears above other content */
 }
 
 .footer-content {
@@ -259,11 +255,6 @@ nav ul button.logout-button {
 
 .footer-content a:hover {
   text-decoration: underline;
-}
-
-/* products.css */
-.products-container {
-  margin-bottom: 700px; /* Adjust the margin size as needed */
 }
 
 

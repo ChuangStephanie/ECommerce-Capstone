@@ -27,8 +27,6 @@ function ResponsiveAppBar() {
 
   const handleUserLogout = () => {
     setUserLogged(false)
-    sessionStorage.removeItem("email");
-    return;
   }
 
   const pages = [{ title: 'Products', path: '/products' }]
