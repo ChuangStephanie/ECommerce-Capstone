@@ -1,4 +1,4 @@
-const baseURL = "https://lizardsplushies.onrender.com";
+const baseURL = "http://localhost:3000";
 
 export async function fetchAllProducts() {
     try {
