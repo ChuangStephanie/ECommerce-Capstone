@@ -37,7 +37,7 @@ db.connect()
 const apiRouter = require("./api");
 app.use("/api", apiRouter);
 
-const YOUR_DOMAIN = "https://lizardsplushies.onrender.com";
+const YOUR_DOMAIN = "https://lizardsplushies.netlify.app/";
 
 app.post("/create-checkout-session", async (req, res) => {
   const { line_items } = req.body;
