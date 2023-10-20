@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from "react";
 import { fetchAllProducts } from "../API";
 import Ghost from "../assets/ghost.png";
@@ -33,22 +35,22 @@ const Products = () => {
   const handleChange = (e) => {
     setFilterBy(e.target.value);
     let filterProducts = products;
-    if (e.target.value === "hightolow") {
+    if (e.target.value == "hightolow") {
       filterProducts.sort((a, b) => b.price - a.price);
-    } else if (e.target.value === "lowtohigh") {
+    } else if (e.target.value == "lowtohigh") {
       filterProducts.sort((a, b) => a.price - b.price);
     }
-    console.log(filterProducts);
+    console.log(filterProducts)
     setProducts(filterProducts);
   };
 
   const addToCart = (product) => {
     // Retrieve existing cart items from local storage or initialize an empty array
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  
     // Check if the product is already in the cart
     const existingItemIndex = cartItems.findIndex((item) => item.id === product.id);
-
+  
     if (existingItemIndex !== -1) {
       // If the product is already in the cart, update its quantity
       cartItems[existingItemIndex].quantity += 1;
@@ -56,13 +58,13 @@ const Products = () => {
       // If the product is not in the cart, add it with a quantity of 1
       cartItems.push({ ...product, quantity: 1 });
     }
-
+  
     // Save the updated cart items back to local storage
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   };
-
+  
   return (
-    <Box className="container-1 products-container">
+    <Box className="container-1">
       <h1 className="products-title">Products</h1>
       <Box className="sort-wrapper">
         <label htmlFor="filter">Sort By</label>
@@ -71,8 +73,8 @@ const Products = () => {
           <option value="hightolow">$High to Low</option>
         </select>
       </Box>
-      <Box className="productsContent">
-        <VerticalTabs products={products} filterBy={filterBy} />
+      <Box className="productsContent" >
+        <VerticalTabs products={products} filterBy={filterBy}/>
       </Box>
     </Box>
   );

@@ -68,20 +68,9 @@ const Login = () => {
     }
   };
 
-  function isAdmin(){
-    if (email == "MxJChuang@money.com") {
-      sessionStorage.setItem("email", email);
-      return;
-    } else {
-      return;
-    }
-  }
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     login();
-    isAdmin();
   };
 
   return (
