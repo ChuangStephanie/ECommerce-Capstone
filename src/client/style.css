@@ -10,11 +10,23 @@ body {
   margin-bottom: 20px;
 }
 
+.users{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
 a,
 button {
   display: block;
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
+}
+
+.newbutton{
+  margin: 15px;
 }
 
 img {

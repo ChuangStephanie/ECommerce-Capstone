@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { fetchAllUsers, fetchAllProducts } from "../API";
+import { useNavigate } from "react-router-dom";
 
 export default function Admin() {
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
   const isAdmin = sessionStorage.getItem("email");
   console.log("Admin?", isAdmin);
 
@@ -41,36 +43,24 @@ export default function Admin() {
 
   console.log("users", users);
 
-  function displayAll() {
-    if (isAdmin) {
-      users.map((user) => {
-        return (
-          <div className="user">
-            <h4>{user.name}</h4>
-            <p>{user.id}</p>
-            <p>{user.email}</p>
-          </div>
-        );
-      });
-      products.map((product) => {
-        return (
-          <>
-            <div className="products2">
-              <h3>{product.name}</h3>
-              <img src={product.image} />
-            </div>
-          </>
-        );
-      });
-    } else {
-      return;
+  const handleDelete = async () => {
+    try {
+      const response = await deleteProduct(productId); 
+      if (response.success) {
+        navigate("/products"); // Redirect to another page after successful deletion
+      } else {
+        setError(response.error);
+      }
+    } catch (err) {
+      setError("An error occurred while deleting the product.");
     }
-  }
+  };  
 
   return (
     <>
       <div className="users">
         <h1>Users</h1>
+        <button className="newbutton">Create Product</button>
         <div className="userinfo">
           {isAdmin ? (
             users.map((user) => {
@@ -99,6 +89,8 @@ export default function Admin() {
                     src={product.image}
                     style={{ width: 100 }}
                   />
+                  <button>Edit</button>
+                  <button onClick={handleDelete}>Delete</button>
                 </div>
               </>
             );
