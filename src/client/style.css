@@ -103,6 +103,12 @@ nav ul li a:hover {
   justify-content: center;
 }
 
+.userinfo,
+.users{
+  text-align: center;
+}
+
+
 .Login-form,
 .register-form,
 h2 {

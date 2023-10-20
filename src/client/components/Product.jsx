@@ -14,7 +14,9 @@ import {
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 import { styled } from "@mui/system";
-import { toast } from 'react-toastify'; // Import toast from react-toastify
+import { toast } from "react-toastify"; // Import toast from react-toastify
+const isAdmin = sessionStorage.getItem("email");
+console.log("Admin?", isAdmin);
 
 const useStyles = styled("div")({
   root: {
@@ -47,17 +49,30 @@ const Product = ({ product }) => {
       cartItems[existingItemIndex].quantity += 1;
       // Notify the user that the item has been added to the cart
       toast.success(`${product.name} added to cart`, {
-        position: "top-right", 
+        position: "top-right",
       });
     } else {
       cartItems.push({ ...product, quantity: 1 });
       // Notify the user that the item has been added to the cart
       toast.success(`${product.name} added to cart`, {
-        position: "top-right", 
+        position: "top-right",
       });
     }
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
+
+  function checkAdmin() {
+    if (isAdmin){
+      return(
+        <>
+          <button>Edit</button>
+          <button>Delete</button>
+        </>
+      );
+    } else {
+      return;
+    }
+  }
 
   return (
     <Card key={product.id} className={`${classes.root} productContent`}>
