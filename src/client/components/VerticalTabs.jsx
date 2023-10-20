@@ -64,7 +64,7 @@ export default function VerticalTabs({products, filterBy}) {
       >
         <Tab label="All Products" {...a11yProps(0)} />
         <Tab label="Keychains" {...a11yProps(1)} />
-        <Tab label="Plushies" {...a11yProps(2)} />
+        <Tab label="Patches" {...a11yProps(2)} />
         <Tab label="OnSale" {...a11yProps(3)} />
       </Tabs>
       <TabPanel value={value} index={0} style={{maxWidth: '80%'}}>
