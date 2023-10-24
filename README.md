@@ -1,5 +1,7 @@
 #  🚀 Capstone Boilerplate
 
+Completed Site: https://lizardsplushies.netlify.app/
+
 A template for building web applications using the PERN (PostgreSQL, Express.js, React, Node.js) stack. 
 
 ##  🏁 Getting Started
